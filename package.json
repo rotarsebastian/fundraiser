@@ -1,0 +1,22 @@
+{
+  "name": "fund-raiser",
+  "version": "1.0.0",
+  "description": "final exam",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rotarsebastian/fundraiser.git"
+  },
+  "author": "Sebastian Rotar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rotarsebastian/fundraiser/issues"
+  },
+  "homepage": "https://github.com/rotarsebastian/fundraiser#readme",
+  "devDependencies": {
+    "sass": "^1.15.1"
+  }
+}
