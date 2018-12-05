@@ -1,0 +1,57 @@
+[
+    {
+      "id": 1,
+      "name": "Rockport Marshall Chukka Boot",
+      "price": "145",
+      "image": "chukka-boot"
+    },
+    {
+      "id": 2,
+      "name": "Kamik Yukon 6 Waterproof Insulated",
+      "price": "120",
+      "image": "kamik"
+    },
+    {
+      "id": 3,
+      "name": "UGG Butte Waterproof Boot",
+      "price": "225",
+      "image": "ugg"
+    },
+    {
+      "id": 4,
+      "name": "Timberland Six Inch Classic",
+      "price": "190",
+      "image": "timberland-icon"
+    },
+    {
+      "id": 5,
+      "name": "J&M 1850 Forrester Cap Toe Boot",
+      "price": "140",
+      "image": "forrester"
+    },
+    {
+      "id": 6,
+      "name": "Timberland Euro Sprint Hiker",
+      "price": "90",
+      "image": "timberland-eurosprint"
+    },
+    {
+      "id": 7,
+      "name": "Timberland Killington Chukka",
+      "price": "125",
+      "image": "timberland-flexible"
+    },
+    {
+      "id": 8,
+      "name": "UGG Harley Waterproof",
+      "price": "250",
+      "image": "ugg-harley"
+    },
+    {
+      "id": 9,
+      "name": "Timberland Chillcat High",
+      "price": "130",
+      "image": "chillcat"
+    }
+  ]
+  
