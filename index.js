@@ -268,108 +268,108 @@ function doSignUp() {
 
 // Shop functionality
 
-$(document).ready(function() {
+$(document).ready(function () {
     const $itemsContainer = $('.items-container');
-  
+
     $.getJSON(ITEMS_URL, itemList => {
-      $itemsContainer.html('');
-      itemList.forEach((item, index) => {
-        const { image, name, price } = item;
-  
-        $itemsContainer.append(`
+        $itemsContainer.html('');
+        itemList.forEach((item, index) => {
+            const { image, name, price } = item;
+
+            $itemsContainer.append(`
         <div class="shop-items">
           <div class="card">
             <img class="card-img-top" src="/assets/images/${image}1.png" onmouseover="this.src='/assets/images/${image}2.png';"
               onmouseout="this.src='/assets/images/${image}1.png';" alt="Card image cap">
             <div class="card-body">
               <p class="card-text">${name}</p>
-              <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex justify-content-between align-items-center bottom-bar">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary add-to-cart-btn" data-target="${index}">Add to cart</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary add-and-donate-btn add-to-cart-btn" data-target="${index}">Add to cart</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary add-and-donate-btn">Donate</button>
                 </div>
-                <strong class="price-color">£${price}</strong>
+                <strong class="price-color price-tag">${price},-</strong>
               </div>
             </div>
           </div>
         </div>
         `);
-      });
-  
-      $addBtn = $('.add-to-cart-btn');
-      $addBtn.click(function() {
-        const itemIndex = $(this).attr('data-target');
-        addToCart(itemList[itemIndex]);
-      });
-    });
-  });
+        });
 
-  const ITEMS_URL = '../products.json';
+        $addBtn = $('.add-to-cart-btn');
+        $addBtn.click(function () {
+            const itemIndex = $(this).attr('data-target');
+            addToCart(itemList[itemIndex]);
+        });
+    });
+});
+
+const ITEMS_URL = '../products.json';
 const STORAGE_KEY = 'OVI_CART';
 
 const JSONcart = localStorage.getItem(STORAGE_KEY);
 const cart = JSONcart ? JSON.parse(JSONcart) : [];
 
 const getCartSize = () => {
-  const size = cart.reduce((previous, current) => {
-    return previous + Number(current.quantity);
-  }, 0);
+    const size = cart.reduce((previous, current) => {
+        return previous + Number(current.quantity);
+    }, 0);
 
-  const $badge = $('.cart-badge');
-  $badge.text(size);
-  if (size > 0) {
-    $badge.removeClass('d-none');
-  } else {
-    $badge.addClass('d-none');
-  }
+    const $badge = $('.cart-badge');
+    $badge.text(size);
+    if (size > 0) {
+        $badge.removeClass('d-none');
+    } else {
+        $badge.addClass('d-none');
+    }
 
-  return size;
+    return size;
 };
 
 const addToCart = item => {
-  const itemIndex = cart.findIndex(
-    _item => _item.id.toString() === item.id.toString()
-  );
+    const itemIndex = cart.findIndex(
+        _item => _item.id.toString() === item.id.toString()
+    );
 
-  if (itemIndex > -1) {
-    const newQuantity = Number(cart[itemIndex].quantity) + 1;
-    cart[itemIndex].quantity = newQuantity;
-  } else {
-    cart.push({
-      id: item.id,
-      item,
-      quantity: 1
-    });
-  }
+    if (itemIndex > -1) {
+        const newQuantity = Number(cart[itemIndex].quantity) + 1;
+        cart[itemIndex].quantity = newQuantity;
+    } else {
+        cart.push({
+            id: item.id,
+            item,
+            quantity: 1
+        });
+    }
 
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
-  getCartSize();
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+    getCartSize();
 };
 
 const removeFromCart = (id, removeOne) => {
-  const itemIndex = cart.findIndex(
-    _item => _item.id.toString() === id.toString()
-  );
+    const itemIndex = cart.findIndex(
+        _item => _item.id.toString() === id.toString()
+    );
 
-  if (itemIndex > -1) {
-    if (removeOne) {
-      const newQuantity = Number(cart[itemIndex].quantity) - 1;
-      if (newQuantity < 1) {
-        cart.splice(itemIndex, 1);
-      } else {
-        cart[itemIndex].quantity = newQuantity;
-      }
-    } else {
-      cart.splice(itemIndex, 1);
+    if (itemIndex > -1) {
+        if (removeOne) {
+            const newQuantity = Number(cart[itemIndex].quantity) - 1;
+            if (newQuantity < 1) {
+                cart.splice(itemIndex, 1);
+            } else {
+                cart[itemIndex].quantity = newQuantity;
+            }
+        } else {
+            cart.splice(itemIndex, 1);
+        }
     }
-  }
 
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
-  getCartSize();
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+    getCartSize();
 };
 
-$(document).ready(function() {
-  getCartSize();
+$(document).ready(function () {
+    getCartSize();
 });
 
 // Shopping cart
@@ -379,21 +379,21 @@ function renderCart() {
     const $subtotal = $('#subtotal');
     const $tax = $('#tax');
     const $total = $('#total');
-  
+
     let billSubtotal = 0;
-  
+
     $itemsContainer.html('');
     cart.forEach(cartItem => {
-      const {
-        item: { image, name, price },
-        id,
-        quantity
-      } = cartItem;
-  
-      const subtotal = Number(price.replace('.', '')) * quantity;
-      billSubtotal += subtotal;
-  
-      $itemsContainer.append(`
+        const {
+            item: { image, name, price },
+            id,
+            quantity
+        } = cartItem;
+
+        const subtotal = Number(price.replace('.', '')) * quantity;
+        billSubtotal += subtotal;
+
+        $itemsContainer.append(`
       <div>
         <img class="card-img-top cart-img" src="/assets/images/${image}1.png" style="width:200px;height:200px";>
         <div class="name-div">
@@ -413,39 +413,39 @@ function renderCart() {
       </div><br><hr>
       `);
     });
-  
+
     $plusBtn = $('.plus-btn');
     $minusBtn = $('.minus-btn');
     $removeBtn = $('.remove-btn');
-  
+
     $plusBtn.click(function () {
-      const id = $(this).attr('data-target');
-      const item = cart.find(cartItem => cartItem.id.toString() === id.toString())
-        .item;
-      addToCart(item);
-      renderCart();
+        const id = $(this).attr('data-target');
+        const item = cart.find(cartItem => cartItem.id.toString() === id.toString())
+            .item;
+        addToCart(item);
+        renderCart();
     });
-  
+
     $minusBtn.click(function () {
-      const id = $(this).attr('data-target');
-      removeFromCart(id, true);
-      renderCart();
+        const id = $(this).attr('data-target');
+        removeFromCart(id, true);
+        renderCart();
     });
-  
+
     $removeBtn.click(function () {
-      const id = $(this).attr('data-target');
-      removeFromCart(id);
-      renderCart();
+        const id = $(this).attr('data-target');
+        removeFromCart(id);
+        renderCart();
     });
-  
+
     const tax = parseInt((25 / 100) * billSubtotal);
     $subtotal.html('&pound; ' + billSubtotal);
     $tax.html('&pound; ' + tax);
     $total.html('&pound; ' + Number(billSubtotal + tax));
-  }
-  
-  $(document).ready(function () {
+}
+
+$(document).ready(function () {
     getCartSize();
     renderCart();
-  });
-  
+});
+

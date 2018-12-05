@@ -61,7 +61,7 @@ a:focus {
 }
 
 a:hover {
-  text-decoration: none;
+  text-decoration: none !important;
   color: #0074D9;
   color: -webkit-linear-gradient(left, #2ECC40, #0074D9);
   color: -o-linear-gradient(left, #2ECC40, #0074D9);
@@ -463,32 +463,49 @@ iframe {
 }
 
 /* Shoes catalog styling */
-
-.items-container{
+.items-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
 }
 
-.shoes-catalog img{
+.shoes-catalog img {
   width: 20em;
   height: auto;
 }
 
-.shop-items{
-  padding-right: 7em;
-  padding-top: 2em;
-  padding-bottom: 2em;
+.shop-items {
+  padding: 1.5em;
+}
+
+.add-and-donate-btn {
+  border: 1px solid black !important;
+}
+
+.add-and-donate-btn:hover {
+  background: black;
+  color: white !important;
+}
+
+.price-tag {
+  padding-top: 10px;
+  margin-bottom: 0;
+  font-size: 14px;
+  line-height: 1.42857143;
+}
+
+.bottom-bar {
+  display: flex;
+  justify-content: space-between;
 }
 
 /* shopping cart */
-
-.cartsvg{
+.cartsvg {
   display: flex;
   flex-wrap: wrap;
 }
 
-.cartsvg img{
+.cartsvg img {
   width: 25px;
   margin-top: 1em;
 }
@@ -505,5 +522,6 @@ iframe {
     margin-top: 20% !important;
   }
 }
+/*# sourceMappingURL=style.css.map */
 
 /*# sourceMappingURL=style.css.map */
