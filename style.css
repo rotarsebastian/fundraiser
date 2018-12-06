@@ -499,10 +499,38 @@ iframe {
   justify-content: space-between;
 }
 
+.shoes-title {
+  text-align: center;
+  padding: 20px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin-bottom: 20px !important;
+  font-size: 25px !important;
+}
+
+.proceed-btn {
+  margin-top: 20px !important;
+  margin-bottom: 20px !important;
+  border: 1px solid black !important;
+}
+
+.proceed-btn:hover {
+  background: black !important;
+  color: white !important;
+  transition: 0.5s;
+}
+
+footer {
+  margin-top: 60px !important;
+}
+
 /* shopping cart */
 .cartsvg {
   display: flex;
   flex-wrap: wrap;
+}
+
+.add-remove {
+  border: 1px solid black !important;
 }
 
 .cartsvg img {
@@ -520,6 +548,59 @@ iframe {
   .modal-dialog {
     width: 350px !important;
     margin-top: 20% !important;
+  }
+
+  .cart-items-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .single-item {
+    position: relative;
+    padding: 25px;
+  }
+
+  .single-pic {
+    display: block;
+    margin: 0 auto;
+  }
+
+  .single-item:nth-child(odd) {
+    border-right: 2px solid green;
+  }
+
+  .single-item {
+    border-bottom: 2px solid green;
+  }
+
+  .single-item:nth-last-child(1) {
+    border-bottom: none;
+  }
+
+  .single-item:nth-last-child(2) {
+    border-bottom: none;
+  }
+
+  .the-total {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 20px;
+  }
+
+  .name-div, .quantity-div, .price-div, .bar-bottom {
+    position: absolute;
+    left: 25%;
+  }
+
+  .bar-bottom {
+    left: 38%;
+    top: 10px;
+  }
+}
+@media (max-width: 768px) {
+  .single-item {
+    text-align: center;
+    padding-bottom: 20px;
   }
 }
 /*# sourceMappingURL=style.css.map */
