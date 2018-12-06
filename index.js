@@ -286,7 +286,6 @@ $(document).ready(function () {
               <div class="d-flex justify-content-between align-items-center bottom-bar">
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-outline-secondary add-and-donate-btn add-to-cart-btn" data-target="${index}">Add to cart</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary add-and-donate-btn">Donate</button>
                 </div>
                 <strong class="price-color price-tag">${price},-</strong>
               </div>
@@ -394,23 +393,23 @@ function renderCart() {
         billSubtotal += subtotal;
 
         $itemsContainer.append(`
-      <div>
-        <img class="card-img-top cart-img" src="/assets/images/${image}1.png" style="width:200px;height:200px";>
+      <div class="single-item">
+        <img class="single-pic card-img-top cart-img" src="/assets/images/${image}1.png" style="width:200px;height:200px";>
         <div class="name-div">
-          <strong>Product:</strong> ${name} 
-        </div> <br>
+          <strong >Product:</strong> ${name} 
+        </div> <br><br>
         <div class="quantity-div">
           <strong>Quantity:</strong> ${quantity}
-        </div> <br>
+        </div> <br><br>
         <div class="price-div">
           <strong>Price:</strong> £${price}
-        </div> <br>
-        <div class="btn-group">
-        <button class="plus-btn btn btn-sm btn-outline-secondary" data-target="${id}">+</button>
-        <button class="minus-btn btn btn-sm btn-outline-secondary" data-target="${id}">-</button>
-        <button class="remove-btn btn btn-sm btn-outline-secondary" data-target="${id}">Remove</button>
+        </div> <br><br>
+        <div class="btn-group bar-bottom">
+        <button class="add-remove plus-btn btn btn-sm btn-outline-secondary" data-target="${id}">+</button>
+        <button class="add-remove minus-btn btn btn-sm btn-outline-secondary" data-target="${id}">-</button>
+        <button class="add-remove remove-btn btn btn-sm btn-outline-secondary" data-target="${id}">Remove</button>
         </div>
-      </div><br><hr>
+      </div>
       `);
     });
 
