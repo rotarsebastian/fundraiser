@@ -41,10 +41,6 @@
   content: "";
 }
 
-.modal-open {
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
 a {
   font-size: 14px;
   line-height: 1.7;
@@ -478,6 +474,69 @@ iframe {
   padding: 1.5em;
 }
 
+.modal-background {
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-shoe-content {
+  background-color: #fefefe;
+  border-radius: 4px;
+  margin: 8em;
+  padding: 1.5em;
+  max-width: 800px;
+  text-align: center;
+}
+
+.hide {
+  display: none;
+}
+
+.condition {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.new-condition {
+  border: 1px solid red;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: red;
+  color: white;
+  font-weight: bolder;
+  margin: 5px;
+}
+
+.condition-new {
+  display: none;
+  border: 1px solid red;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: red;
+  color: white;
+  font-weight: bolder;
+  margin: 5px;
+}
+
 .add-and-donate-btn {
   border: 1px solid black !important;
 }
@@ -485,6 +544,19 @@ iframe {
 .add-and-donate-btn:hover {
   background: black;
   color: white !important;
+}
+
+.myaddress-input {
+  display: none;
+}
+
+.myphone-input {
+  display: none;
+}
+
+.shake {
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s !important;
 }
 
 .price-tag {
@@ -529,8 +601,23 @@ footer {
   flex-wrap: wrap;
 }
 
+.card {
+  position: relative;
+}
+
+.new-product {
+  position: absolute;
+  right: 0;
+  display: none;
+}
+
 .add-remove {
   border: 1px solid black !important;
+}
+
+.add-remove:hover {
+  background: black !important;
+  color: white !important;
 }
 
 .cartsvg img {
@@ -547,7 +634,7 @@ footer {
 @media (min-width: 768px) {
   .modal-dialog {
     width: 350px !important;
-    margin-top: 20% !important;
+    margin-top: 8% !important;
   }
 
   .cart-items-container {
@@ -563,6 +650,7 @@ footer {
   .single-pic {
     display: block;
     margin: 0 auto;
+    padding-bottom: 35px;
   }
 
   .single-item:nth-child(odd) {
@@ -594,7 +682,6 @@ footer {
 
   .bar-bottom {
     left: 38%;
-    top: 10px;
   }
 }
 @media (max-width: 768px) {

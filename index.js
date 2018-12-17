@@ -59,6 +59,17 @@ function validate(input) {
             return false;
         }
     }
+
+    if ($(input).attr('type') == 'phone' || $(input).attr('name') == 'phone') {
+        if ($(input).val().trim().match(/(\+?\d{2}\s?)?(\s?\d{2}){4}/) == null) {
+            return false;
+        }
+    }
+    else {
+        if ($(input).val().trim() == '') {
+            return false;
+        }
+    }
 }
 
 function showValidate(input) {
@@ -92,9 +103,6 @@ $('.btn-show-pass').on('click', function () {
 
 });
 
-
-
-
 const loginForm = document.querySelector(".login100-form");
 const submitForm = document.querySelector(".login100-form-btn");
 
@@ -102,13 +110,21 @@ loginForm.addEventListener("submit", e => {
     e.preventDefault();
     let formEmail = loginForm.elements.email.value;
     let formPassword = loginForm.elements.pass.value;
+    let formAddress = loginForm.elements.address.value;
+    let formPhone = loginForm.elements.phone.value;
+    //let address = document.querySelector(".myaddress-input");
+    let myphone = document.querySelector(".phone-input");
+    let email = document.querySelector(".email-input");
     if (submitForm.innerHTML === "Login") {
         checkLogin(formEmail, formPassword);
     }
     else {
         const myData = {
             email: formEmail,
-            password: formPassword
+            password: formPassword,
+            phone: formPhone,
+            address: formAddress,
+            bonusCode: 0
         }
 
         fetch("https://5bdffe29f2ef840013994a15.mockapi.io/messages")
@@ -122,6 +138,31 @@ loginForm.addEventListener("submit", e => {
                         ok = 1;
                     }
                 }
+
+
+                if (validate(email) == false) {
+                    ok = 1;
+                }
+
+                if (validate(myphone) == false) {
+                    ok = 1;
+                    console.log("da");
+                }
+
+                let title = document.querySelector(".login100-form-title");
+                let loginButton = document.querySelector(".login100-form-btn");
+                let myText = document.querySelector(".txt1");
+                let signUp = document.querySelector(".sign-up");
+                let emailInput = document.querySelector(".myemail-input");
+                let passInput = document.querySelector(".mypassword-input");
+                let address = document.querySelector(".myaddress-input");
+                let phone = document.querySelector(".myphone-input");
+                let logButton = document.querySelector(".wrap-login100-form-btn");
+
+                if (ok == 1) {
+                    //title.classList.toggle("bounceIn");
+                }
+
                 if (ok == 0) {
                     fetch("https://5bdffe29f2ef840013994a15.mockapi.io/messages/", {
                         method: "post",
@@ -134,13 +175,7 @@ loginForm.addEventListener("submit", e => {
                         .then(res => { res.json(); })
                         .then(d => {
                         });
-                    let title = document.querySelector(".login100-form-title");
-                    let loginButton = document.querySelector(".login100-form-btn");
-                    let myText = document.querySelector(".txt1");
-                    let signUp = document.querySelector(".sign-up");
-                    let emailInput = document.querySelector(".myemail-input");
-                    let passInput = document.querySelector(".mypassword-input");
-                    let logButton = document.querySelector(".wrap-login100-form-btn");
+
                     logButton.style.display = "none";
                     emailInput.style.display = "none";
                     passInput.style.display = "none";
@@ -153,6 +188,9 @@ loginForm.addEventListener("submit", e => {
                     myText.textContent = "Want to log in to your account?";
                     signUp.classList.toggle("bounceIn");
                     signUp.textContent = "Log In";
+                    address.style.display = "none";
+                    phone.style.display = "none";
+
                 }
             })
     }
@@ -187,6 +225,7 @@ function checkLogin(email, password) {
                         myspan.classList.remove("glyphicon-log-in");
                         myspan.classList.add("glyphicon-log-out");
                         ok = 2;
+                        console.log(data[i]);
                     }
                 }
             }
@@ -212,7 +251,17 @@ function init() {
     loginButton.addEventListener("click", doLogin);
     signUp.addEventListener("click", doSignUp);
 
+
 }
+
+function checkingCart() {
+    let cartShoes = document.querySelectorAll(".single-item");
+    if (cartShoes.length > 2 && cartShoes.length % 2 == 1) {
+        cartShoes[cartShoes.length - 2].style.borderBottom = "2px solid green";
+    }
+}
+
+setTimeout(checkingCart, 50);
 
 function doLogin() {
     let loginButton = document.querySelector(".login-logout");
@@ -229,6 +278,8 @@ function doSignUp() {
     let emailInput = document.querySelector(".myemail-input");
     let passInput = document.querySelector(".mypassword-input");
     let logButton = document.querySelector(".wrap-login100-form-btn");
+    let phone = document.querySelector(".myphone-input");
+    let address = document.querySelector(".myaddress-input");
     logButton.style.display = "block";
     emailInput.style.display = "block";
     passInput.style.display = "block";
@@ -246,7 +297,8 @@ function doSignUp() {
         myText.textContent = "Already have an account?";
         signUp.classList.toggle("bounceIn");
         signUp.textContent = "Log In";
-
+        phone.style.display = "block";
+        address.style.display = "block";
     }
     else {
         modal.dataset.test = "login";
@@ -262,6 +314,8 @@ function doSignUp() {
         myText.textContent = "Don’t have an account?";
         signUp.classList.toggle("bounceIn");
         signUp.textContent = "Sign Up";
+        phone.style.display = "none";
+        address.style.display = "none";
     }
 
 }
@@ -274,13 +328,14 @@ $(document).ready(function () {
     $.getJSON(ITEMS_URL, itemList => {
         $itemsContainer.html('');
         itemList.forEach((item, index) => {
-            const { image, name, price } = item;
+            const { image, name, price, bought, condition } = item;
 
             $itemsContainer.append(`
         <div class="shop-items">
           <div class="card">
+          <div class="new-product" data-target="${condition}"><span class="new-condition">New!</span></div>
             <img class="card-img-top" src="/assets/images/${image}1.png" onmouseover="this.src='/assets/images/${image}2.png';"
-              onmouseout="this.src='/assets/images/${image}1.png';" alt="Card image cap">
+              onmouseout="this.src='/assets/images/${image}1.png';" data-target="${index}" alt="Card image cap">
             <div class="card-body">
               <p class="card-text">${name}</p>
               <div class="d-flex justify-content-between align-items-center bottom-bar">
@@ -292,16 +347,109 @@ $(document).ready(function () {
             </div>
           </div>
         </div>
+        <div id="shoe-modal" class="modal-background modal hide">
+                <aside class="modal-shoe-content">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <h3 class="modal-name">${name}</h3>
+                    <img class="modal-img" src="/assets/images/${image}1.png" alt="data-image">
+                    <p class="modal-bought">Bought on</p>
+                    <div class="condition"><p class="modal-condition"></p><span class="condition-new"></span></div>
+                    <h4 class="modal-price"></h4>
+                </aside>
+            </div>
         `);
+
+            if (itemList[index].condition == "New") {
+                let $newShoe = $('.new-product');
+                $newShoe[$newShoe.length - 1].style.display = "block";
+            }
+
         });
+
 
         $addBtn = $('.add-to-cart-btn');
         $addBtn.click(function () {
             const itemIndex = $(this).attr('data-target');
             addToCart(itemList[itemIndex]);
         });
+
+        $image = $('.card-img-top');
+        $image.click(function () {
+            const itemIndex = $(this).attr('data-target');
+            openModal(itemList[itemIndex]);
+        });
     });
 });
+
+function openModal(item) {
+    let itemModal = document.querySelector("#shoe-modal");
+    let myBody = document.querySelector("body");
+    myBody.classList.add("modal-open");
+    itemModal.classList.remove("hide");
+    itemModal.style.display = "block";
+    let modalName = document.querySelector(".modal-name");
+    let modalPic = document.querySelector(".modal-img");
+    let modalBoughtAt = document.querySelector(".modal-bought");
+    let modalCondition = document.querySelector(".modal-condition");
+    let modalPrice = document.querySelector(".modal-price");
+    modalName.textContent = item.name;
+    modalPic.src = "/assets/images/" + item.image + "1.png";
+    modalBoughtAt.textContent = "Bought on: " + item.bought;
+    var starSymbol = String.fromCharCode(9733);
+    var emptySymbol = String.fromCharCode(9734);
+    modalCondition.textContent = "Condition: ";
+    let conditionNew = document.querySelector(".condition-new");
+    let ok = 0;
+    for (i = 1; i <= 5; i++) {
+        if (ok == 1) {
+            modalCondition.textContent += emptySymbol;
+        }
+        if (ok == 0 && item.condition >= i) {
+            modalCondition.style.display = "-webkit-inline-box";
+            modalCondition.textContent += starSymbol;
+            conditionNew.style.display = "none";
+            if (item.condition == i) {
+                ok = 1;
+            }
+        }
+        if (item.condition == "New") {
+            conditionNew.style.display = "-webkit-inline-box";
+            conditionNew.textContent = "New!";
+            modalCondition.style.display = "none";
+        }
+    }
+    modalPrice.textContent = "Price: " + item.price + " kr";
+}
+
+// When the user clicks on <span> (x), close the modal
+function closeModal() {
+    const modal = document.querySelector("#shoe-modal");
+    modal.classList.add("hide");
+    let myBody = document.querySelector("body");
+    myBody.classList.remove("modal-open");
+
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+    let modal = document.querySelector("#shoe-modal");
+    if (event.target == modal) {
+        modal.classList.add("hide");
+        let myBody = document.querySelector("body");
+        myBody.classList.remove("modal-open");
+    }
+}
+
+// When the user clicks Esc button, close the modal
+document.onkeydown = function (evt) {
+    evt = evt || window.event;
+    let modal = document.querySelector("#shoe-modal");
+    if (evt.keyCode == 27) {
+        modal.classList.add("hide");
+        let myBody = document.querySelector("body");
+        myBody.classList.remove("modal-open");
+    }
+};
 
 const ITEMS_URL = '../products.json';
 const STORAGE_KEY = 'OVI_CART';
@@ -314,6 +462,7 @@ const getCartSize = () => {
         return previous + Number(current.quantity);
     }, 0);
 
+
     const $badge = $('.cart-badge');
     $badge.text(size);
     if (size > 0) {
@@ -323,6 +472,7 @@ const getCartSize = () => {
     }
 
     return size;
+
 };
 
 const addToCart = item => {
@@ -340,7 +490,6 @@ const addToCart = item => {
             quantity: 1
         });
     }
-
     localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
     getCartSize();
 };
@@ -365,14 +514,41 @@ const removeFromCart = (id, removeOne) => {
 
     localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
     getCartSize();
+    let cartSize = getCartSize();
+    if (cartSize == 0) {
+        let shoesTitle = document.querySelector(".shoes-title");
+        let theTotal = document.querySelector(".the-total");
+        let proceedBtn = document.querySelector(".proceed-btn");
+        let footer = document.querySelector("footer");
+        proceedBtn.style.display = "none";
+        theTotal.style.display = "none";
+        shoesTitle.textContent = "Your shop cart is empty";
+        footer.style.position = "absolute";
+        footer.style.bottom = "5px";
+        footer.style.left = "5%";
+    }
+
 };
 
 $(document).ready(function () {
     getCartSize();
+    let cartSize = getCartSize();
+    if (cartSize == 0) {
+        let shoesTitle = document.querySelector(".shoes-title");
+        let theTotal = document.querySelector(".the-total");
+        let proceedBtn = document.querySelector(".proceed-btn");
+        let footer = document.querySelector("footer");
+        proceedBtn.style.display = "none";
+        theTotal.style.display = "none";
+        shoesTitle.textContent = "Your shop cart is empty";
+        footer.style.position = "absolute";
+        footer.style.bottom = "5px";
+        footer.style.left = "5%";
+    }
 });
 
 // Shopping cart
-
+let ok = 0;
 function renderCart() {
     const $itemsContainer = $('.cart-items-container');
     const $subtotal = $('#subtotal');
@@ -402,7 +578,7 @@ function renderCart() {
           <strong>Quantity:</strong> ${quantity}
         </div> <br><br>
         <div class="price-div">
-          <strong>Price:</strong> £${price}
+          <strong>Price:</strong> ${price} kr
         </div> <br><br>
         <div class="btn-group bar-bottom">
         <button class="add-remove plus-btn btn btn-sm btn-outline-secondary" data-target="${id}">+</button>
@@ -438,13 +614,15 @@ function renderCart() {
     });
 
     const tax = parseInt((25 / 100) * billSubtotal);
-    $subtotal.html('&pound; ' + billSubtotal);
-    $tax.html('&pound; ' + tax);
-    $total.html('&pound; ' + Number(billSubtotal + tax));
+    $subtotal.html(billSubtotal + ' kr');
+    $tax.html(tax + ' kr');
+    $total.html(Number(billSubtotal + tax) + ' kr');
 }
 
 $(document).ready(function () {
     getCartSize();
     renderCart();
 });
+
+
 
