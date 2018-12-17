@@ -9,6 +9,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../fonts/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" type="text/css" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <title>Fundraiser</title>
 </head>
@@ -31,7 +32,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="../index.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                             Home</a></li>
-                    <li class="active"><a href="shoes.html">
+                    <li><a href="shoes.html">
                             <span class="glyphicons glyphicons-shoe-steps" aria-hidden="true"></span> Shoes</a></li>
                     <li><a href="contact.html"><span class="glyphicon glyphicon-envelope fa fa-envelope-o"></span>
                             Contact</a></li>
@@ -57,7 +58,7 @@
         </div>
     </nav>
 
-    <div id="loginModal" data-test="login" class="modal fade" role="dialog">
+    <div id="loginModal" data-test="login" class="modal modal-background fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div>
@@ -84,6 +85,16 @@
                                         </span>
                                         <input class="input100 password-input" type="password" name="pass">
                                         <span class="focus-input100" data-placeholder="Password"></span>
+                                    </div>
+
+                                    <div class="wrap-input100 validate-input myaddress-input" data-validate="">
+                                        <input class="input100 address-input" type="text" name="address">
+                                        <span class="focus-input100" data-placeholder="Address"></span>
+                                    </div>
+
+                                    <div class="wrap-input100 validate-input myphone-input" data-validate="">
+                                        <input class="input100 phone-input" type="text" name="phone">
+                                        <span class="focus-input100" data-placeholder="Phone Number"></span>
                                     </div>
 
                                     <div class="container-login100-form-btn">
