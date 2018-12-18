@@ -4,6 +4,7 @@
   padding: 0px;
   box-sizing: border-box;
   scroll-behavior: smooth;
+  font-family: Poppins-Regular;
 }
 
 @font-face {
@@ -40,6 +41,10 @@
 
 .glyphicons-shoe-steps:before {
   content: "";
+}
+
+.donate-title {
+  font-size: 28px;
 }
 
 a {
@@ -224,8 +229,20 @@ iframe {
   -ms-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
 }
 
+#dashboard-button, #login-button {
+  cursor: pointer;
+}
+
+#dashboard-button {
+  display: none;
+}
+
 .login100-form {
   width: 100%;
+}
+
+.sign-up {
+  cursor: pointer;
 }
 
 .login100-form-title {
@@ -575,7 +592,6 @@ iframe {
 .shoes-title {
   text-align: center;
   padding: 20px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin-bottom: 20px !important;
   font-size: 25px !important;
 }
@@ -624,6 +640,235 @@ footer {
 .cartsvg img {
   width: 25px;
   margin-top: 1em;
+}
+
+.navbar {
+  margin-bottom: 0 !important;
+}
+
+section {
+  height: calc(100vh - 20em);
+  padding: 4em;
+  align-items: center;
+}
+
+section:nth-of-type(1) {
+  height: calc(100vh - 51px) !important;
+  color: #9d9d9d !important;
+  padding: 0;
+}
+
+.firstSection {
+  width: 100%;
+  height: 75%;
+  max-height: 75%;
+}
+
+.secondSection {
+  position: relative;
+  height: 25%;
+}
+
+.firstSectionPic {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+}
+
+section h3 {
+  margin: 0 !important;
+}
+
+section:nth-of-type(3),
+section:nth-of-type(5),
+section:nth-of-type(7) {
+  background: white;
+  color: black;
+}
+
+section:nth-of-type(2),
+section:nth-of-type(4),
+section:nth-of-type(6),
+section:nth-of-type(8) {
+  background: beige;
+  color: black;
+}
+
+.firstText {
+  text-align: center;
+  margin: 15px;
+}
+
+.secondText {
+  text-align: center;
+  margin: 5px;
+  margin-bottom: 10px;
+  font-size: 21px;
+}
+
+.group-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.choice {
+  font-size: -webkit-xxx-large;
+  margin: 0 !important;
+}
+
+.step1,
+.step2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 12% 0;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+}
+
+.step1 > div > span {
+  font-size: 200px;
+  padding-left: 32%;
+}
+
+.step-content {
+  position: relative;
+}
+
+.step1Text1 {
+  padding-top: 10%;
+  padding-bottom: 5%;
+  padding-right: 3%;
+  padding-left: 3%;
+}
+
+.stepText1 {
+  margin: 0 !important;
+  position: absolute;
+  top: 40%;
+  left: 8%;
+}
+
+.step1-img {
+  object-fit: cover;
+  width: 100%;
+}
+
+.Step1Text2 {
+  text-align: center;
+  padding-top: 6%;
+}
+
+.step2 > div > span {
+  font-size: 200px;
+  padding-left: 32%;
+}
+
+.step2Text1 {
+  position: absolute;
+  top: 40%;
+  left: 15%;
+}
+
+.stepText2 {
+  margin: 0 !important;
+  position: absolute;
+  top: 40%;
+  left: 8%;
+}
+
+.step2Text {
+  text-align: center;
+  padding-top: 6%;
+}
+
+.divStep3Text1 {
+  padding-top: 8%;
+}
+
+.form-wrapper {
+  padding: 10vh 10vw 80vh 10vw;
+  font-size: 1.5em;
+}
+
+.button-wrap {
+  width: 25%;
+}
+
+.contact-header {
+  text-align: center;
+  margin-top: 2em;
+}
+
+.contact-header a {
+  background: -webkit-linear-gradient(#0074d9, #2ECC40);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#faq {
+  font-size: 3em;
+  margin-bottom: 10vh;
+}
+
+.faq-link {
+  color: #000;
+  font-size: 1em;
+}
+
+.faq-question {
+  color: #0074d9;
+  font-size: 1.5em;
+  list-style-type: disc;
+  margin-bottom: 0.5vh;
+}
+
+.faq-answer {
+  color: #2ECC40;
+  font-size: 1.5em;
+  margin-bottom: 5vh;
+}
+
+.faq-wrapper {
+  margin: 5vh 10vw 5vh 10vw;
+  padding: 1vh 2vw 1vh 2vw;
+}
+
+.bot-left {
+  position: relative;
+}
+
+.bot-left:before, .bot-left:after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: -3px;
+}
+
+.bot-left:before {
+  top: -3px;
+  width: 3px;
+  background-image: -webkit-gradient(linear, 0 100%, 0 0, from(#0074d9, #2ECC40), to(transparent));
+  background-image: -webkit-linear-gradient(transparent, #0074d9, #2ECC40);
+  background-image: -moz-linear-gradient(transparent, #0074d9, #2ECC40);
+  background-image: -o-linear-gradient(transparent, #0074d9, #2ECC40);
+}
+
+.bot-left:after {
+  right: -3px;
+  height: 3px;
+  background-image: -webkit-gradient(linear, 0 0, 100% 0, from(#0074d9, #2ECC40), to(transparent));
+  background-image: -webkit-linear-gradient(left, #0074d9, #2ECC40, transparent);
+  background-image: -moz-linear-gradient(left, #0074d9, #2ECC40, transparent);
+  background-image: -o-linear-gradient(left, #0074d9, #2ECC40, transparent);
 }
 
 @media (max-width: 992px) {
@@ -685,82 +930,6 @@ footer {
     left: 38%;
   }
 }
-
-  .form-wrapper{
-    padding: 10vh 10vw 80vh 10vw;
-    font-size: 1.5em;
-  }
-
-  .button-wrap{
-    width: 25%;
-  }
-
-  .contact-header{
-    text-align: center;
-    margin-top: 2em;
-  }
-
-  .contact-header a {
-    background: -webkit-linear-gradient(#0074d9, #2ECC40);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  #faq{
-    font-size: 3em;
-    margin-bottom: 10vh;
-  }
-
-  .faq-link{
-    color: #000;
-    font-size: 1em;
-  }
-
-  .faq-question{
-    color: #0074d9;
-    font-size: 1.5em;
-    list-style-type: disc;
-    margin-bottom: .5vh;
-  }
-
-  .faq-answer{
-    color: #2ECC40;
-    font-size: 1.5em;
-    margin-bottom: 5vh;
-  }
-
-  .faq-wrapper{
-    margin: 5vh 10vw 5vh 10vw;
-    padding: 1vh 2vw 1vh 2vw;
-  }
-
-  .bot-left {
-    position: relative;
-  }
-  .bot-left:before, .bot-left:after {
-    content: "";
-    position: absolute;
-    bottom: -3px;
-    left: -3px;
-    
-  }
-  .bot-left:before {
-    top: -3px;
-    width: 3px;
-    background-image: -webkit-gradient(linear, 0 100%, 0 0, from(#0074d9, #2ECC40), to(transparent));
-    background-image: -webkit-linear-gradient(transparent, #0074d9, #2ECC40);
-    background-image: -moz-linear-gradient(transparent, #0074d9, #2ECC40);
-    background-image: -o-linear-gradient(transparent, #0074d9, #2ECC40);
-  }
-  .bot-left:after {
-    right: -3px;
-    height: 3px;
-    background-image: -webkit-gradient(linear, 0 0, 100% 0, from(#0074d9, #2ECC40), to(transparent));
-    background-image: -webkit-linear-gradient(left, #0074d9, #2ECC40, transparent);
-    background-image: -moz-linear-gradient(left, #0074d9, #2ECC40, transparent);
-    background-image: -o-linear-gradient(left, #0074d9, #2ECC40, transparent);
-  }
-  
 @media (max-width: 768px) {
   .single-item {
     text-align: center;
