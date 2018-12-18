@@ -2,10 +2,13 @@ let loginButton = document.querySelector("#login-button");
 loginButton.addEventListener("click", doModal);
 
 function doModal() {
-    let modal = document.querySelector("#loginModal");
-    let body = document.querySelector("body");
-    body.classList.add("modal-open");
-    modal.classList.add("in");
+    let myLoginButton = document.querySelector(".login-logout");
+    if (myLoginButton.textContent == "Login") {
+        let modal = document.querySelector("#loginModal");
+        let body = document.querySelector("body");
+        body.classList.add("modal-open");
+        modal.classList.add("in");
+    }
 }
 
 
@@ -146,7 +149,7 @@ loginForm.addEventListener("submit", e => {
 
                 if (validate(myphone) == false) {
                     ok = 1;
-                    console.log("da");
+
                 }
 
                 let title = document.querySelector(".login100-form-title");
@@ -220,11 +223,27 @@ function checkLogin(email, password) {
                         modalBackground.remove();
                         body.classList.remove("modal-open");
                         let loginButton = document.querySelector(".login-logout");
-                        loginButton.textContent = " Logout";
+                        loginButton.textContent = "Logout";
                         let myspan = document.querySelector(".glyphicon-log-in");
                         myspan.classList.remove("glyphicon-log-in");
                         myspan.classList.add("glyphicon-log-out");
                         ok = 2;
+                        if (data[i].email.toLowerCase() == "admin@admin.dk" && data[i].password == "admin") {
+                            let dashboard = document.querySelector("#dashboard-button");
+                            dashboard.style.display = "block";
+                            localStorage.setItem("dashboard", "true");
+                        }
+                        else {
+                            localStorage.setItem("dashboard", "false");
+                        }
+
+                        localStorage.setItem("logout", "Logout");
+                        localStorage.setItem("user-email", data[i].email);
+                        localStorage.setItem("user-address", data[i].address);
+                        localStorage.setItem("user-id", data[i].id);
+                        localStorage.setItem("user-phone", data[i].phone);
+                        localStorage.setItem("user-bonusCode", data[i].bonusCode);
+
                         console.log(data[i]);
                     }
                 }
@@ -246,9 +265,10 @@ function checkLogin(email, password) {
 init();
 
 function init() {
+    doLogin();
     let loginButton = document.querySelector("#login-button");
     let signUp = document.querySelector(".sign-up");
-    loginButton.addEventListener("click", doLogin);
+    loginButton.addEventListener("click", doLoginLogout);
     signUp.addEventListener("click", doSignUp);
 
 
@@ -264,12 +284,32 @@ function checkingCart() {
 setTimeout(checkingCart, 50);
 
 function doLogin() {
-    let loginButton = document.querySelector(".login-logout");
-    if (loginButton.textContent == " Logout") {
-        loginButton.textContent = "Login";
-        let myspan = document.querySelector(".glyphicon-log-out");
+    let myLoginButton = document.querySelector(".login-logout");
+    if (localStorage.getItem("logout") == "Logout") {
+        myLoginButton.textContent = localStorage.getItem("logout");
+        let myspan = document.querySelector(".glyphicon-log-in");
+        myspan.classList.remove("glyphicon-log-in");
+        myspan.classList.add("glyphicon-log-out");
+        console.log(localStorage);
+    }
+    if (localStorage.getItem("dashboard") == "true" && myLoginButton.textContent == "Logout") {
+        let dashboard = document.querySelector("#dashboard-button");
+        dashboard.style.display = "block";
+    }
+    console.log(localStorage);
+}
+
+function doLoginLogout() {
+    let myLoginButton = document.querySelector(".login-logout");
+
+    if (myLoginButton.textContent == "Logout") {
+        myLoginButton.textContent = "Login";
+        localStorage.logout = "Login";
+        let myspan = document.querySelector(".login-icon");
         myspan.classList.remove("glyphicon-log-out");
         myspan.classList.add("glyphicon-log-in");
+        let dashboard = document.querySelector("#dashboard-button");
+        dashboard.style.display = "none";
     }
 }
 

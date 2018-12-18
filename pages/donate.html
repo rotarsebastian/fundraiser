@@ -5,13 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="stylesheet" type="text/css" href="node_modules/sal.js/dist/sal.css">
+    <link rel="stylesheet" type="text/css" href="../style.css">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="fonts/css/material-design-iconic-font.min.css">
-    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../fonts/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
     <title>Fundraiser</title>
 </head>
 
@@ -31,14 +29,16 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="index.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                    <li><a href="../index.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                             Home</a></li>
-                    <li><a href="pages/donate.html">
+
+                    <li class="active"><a href="#">
                             <span class="glyphicon glyphicon-gift" aria-hidden="true"></span> Donate</a></li>
 
-                    <li><a href="pages/shoes.html">
+                    <li><a href="shoes.html">
                             <span class="glyphicons glyphicons-shoe-steps" aria-hidden="true"></span> Shoes</a></li>
-                    <li><a href="pages/contact.html"><span class="glyphicon glyphicon-envelope fa fa-envelope-o"></span>
+
+                    <li><a href="contact.html"><span class="glyphicon glyphicon-envelope fa fa-envelope-o"></span>
                             Contact</a></li>
 
 
@@ -126,133 +126,93 @@
         </div>
     </div>
 
-    <section>
-        <div class="firstSection">
-            <img class="firstSectionPic" src="assets/images/background.jpg" alt="" class="src">
-        </div>
-        <div class="secondSection">
-            <h2 class="firstText">Want to get a new pair of shoes at lower price?</h2>
-            <h2 class="secondText">Or simply donate your old shoes for
-                someone in need?</h2>
-            <div class="group-bottom">
-                <!-- <h2 class="firstText">We will take care of that!</h2>-->
-                <h2 class="firstText">Let your shoes make a step ahead!</h2>
+    <h1 class="contact-header bounce donate-title">Donate your extra shoes now <br> and make someone else's feet happy!</h1>
+
+    <!-- Contact form -->
+
+    <div class="form-wrapper">
+        <form id="contact-form" method="post" action="contact.php" role="form">
+            <div class="messages"></div>
+            <div class="controls">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="form_name">Firstname *</label>
+                            <input id="form_name" type="text" name="name" class="form-control" placeholder="Please enter your firstname "
+                                required="required" data-error="Firstname is required.">
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="form_lastname">Lastname *</label>
+                            <input id="form_lastname" type="text" name="surname" class="form-control" placeholder="Please enter your lastname "
+                                required="required" data-error="Lastname is required.">
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="form_email">Email *</label>
+                            <input id="form_email" type="email" name="email" class="form-control" placeholder="Please enter your email "
+                                required="required" data-error="Valid email is required.">
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="form_need">Please specify your need *</label>
+                            <select id="form_need" name="need" class="form-control" required="required" data-error="Please specify your need.">
+                                <option value=""></option>
+                                <option value="Request quotation">Request quotation</option>
+                                <option value="Request order status">Request order status</option>
+                                <option value="Request copy of an invoice">Request copy of an invoice</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="form_message">Message *</label>
+                            <textarea id="form_message" name="message" class="form-control" placeholder="Write your message"
+                                rows="4" required="required" data-error="Please, leave us a message."></textarea>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="container-login100-form-btn button-wrap">
+                            <div class="wrap-login100-form-btn">
+                                <div class="login100-form-bgbtn"></div>
+                                <button type="submit" class="btn-send login100-form-btn" value="Send message">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="text-muted">
+                            <strong>*</strong> These fields are required.
+                        </p>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Step1 -->
-    <section>
-        <div data-sal-duration="900" data-sal="slide-up" data-sal-delay="100" data-sal-easing="ease-out-bounce">
-            <div class="step1">
-                <div class="step-content">
-                    <h1 class="stepText1">Step</h1>
-                    <span>1</span>
-                </div>
-                <div>
-                    <h3 class="step1Text1">
-                        Sign up, donate and get your bonuses<br>or donate right away and make <br>sameone in need to
-                        feel warm in <br>his new shoes
-                    </h3>
-                    <br />
-                    <h4 class="choice">or</h4>
-                </div>
-                <div data-sal-duration="1200" data-sal="slide-up" data-sal-delay="300" data-sal-easing="ease-out-bounce">
-                    <img class="step1-img" src="assets/images/walking.gif" alt="walking-shoes">
-                </div>
+        </form>
+    </div>
 
-            </div>
-    </section>
-
-    <section>
-        <div class="" data-sal-duration="900" data-sal="slide-up" data-sal-delay="200" data-sal-easing="ease-out-bounce">
-            <h3 class="Step1Text2">Used shoes for handing<br>themover to homelesspeople</h3>
-        </div>
-    </section>
-    <!-- Step2 -->
-    <section>
-        <div data-sal-duration="900" data-sal="slide-up" data-sal-delay="200" data-sal-easing="ease-out-bounce">
-            <div class="step2">
-                <div>bla bla</div>
-                <div class="step-content">
-                    <h3 class="step2Text1">Stay back and<br />do not worry</h3>
-                </div>
-                <div class="step-content">
-                    <h1 class="stepText2">Step</h1>
-                    <span>2</span>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section>
-        <div data-sal-duration="900" data-sal="slide-up" data-sal-delay="200" data-sal-easing="ease-out-bounce">
-            <h3 class="step2Text">Our driver will take<br />care of the process</h3>
-        </div>
-    </section>
-    <section>
-        <div data-sal-duration="900" data-sal="slide-up" data-sal-delay="200" data-sal-easing="ease-out-bounce">
-            <h3 class="step2Text">By fitting them in<br />a box with a label on</h3>
-        </div>
-    </section>
-    <section>
-        <div data-sal-duration="900" data-sal="slide-up" data-sal-delay="200" data-sal-easing="ease-out-bounce">
-            <h3 class="step2Text">Then the box will be<br />taken to our department</h3>
-        </div>
-    </section>
-    <!-- Step3 -->
-    <section>
-        <div data-sal-duration="900" data-sal="slide-up" data-sal-delay="200" data-sal-easing="ease-out-bounce">
-
-
-            <div class="step1">
-                <div class="step-content">
-                    <h1 class="stepText1">Step</h1>
-                    <span>3</span>
-                </div>
-                <div>
-                    <h3 class="step1Text1">
-                        Keep track of your<br />shoes and get notified<br />either if they get
-                        sold or<br>handed to their new owner</or>
-                    </h3>
-                </div>
-                <div>bla bla</div>
-            </div>
-        </div>
-    </section>
-
-    <script src="index.js"></script>
+    <script src="../index.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
-    <script src="main.js"></script>
-    <script src="node_modules/sal.js/dist/sal.js"></script>
-    <script type="module">
-        import jump from './node_modules/jump.js/dist/jump.module.js';
-
-        sal({
-            once: false,
-        });
-        /*var button = document.getElementById('button');
-        button.addEventListener('click', function (event) {
-            jump('.target')
-        });
-        button2.addEventListener('click', function (event) {
-            jump('.target2', {
-                duration: 2000,
-            })
-        });
-        button3.addEventListener('click', function (event) {
-            jump('.target3', {
-                duration: 2000,
-                offset: 100,
-                easing: easeInOutQuad,
-                callback: () => {
-                    console.log('Completed!')
-                }
-            })
-        });*/
-    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
 
 </body>
 

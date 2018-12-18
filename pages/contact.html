@@ -31,6 +31,9 @@
                 <ul class="nav navbar-nav">
                     <li><a href="../index.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                             Home</a></li>
+
+                    <li><a href="donate.html">
+                            <span class="glyphicon glyphicon-gift" aria-hidden="true"></span> Donate</a></li>
                     <li><a href="shoes.html">
                             <span class="glyphicons glyphicons-shoe-steps" aria-hidden="true"></span> Shoes</a></li>
                     <li class="active"><a href="#"><span class="glyphicon glyphicon-envelope fa fa-envelope-o"></span>
@@ -40,8 +43,13 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
+                        <a href="dashboard.html" id="dashboard-button" data-target="#dashboard">
+                            <span class="glyphicon glyphicon-stats"></span>
+                            <span class="">Dashboard</span></a>
+                    </li>
+                    <li>
                         <a id="login-button" data-toggle="modal" data-target="#loginModal">
-                            <span class="glyphicon glyphicon-log-in"></span>
+                            <span class="login-icon glyphicon glyphicon-log-in"></span>
                             <span class="login-logout">Login</span></a>
                     </li>
                 </ul>
@@ -52,8 +60,7 @@
     </nav>
 
     <!-- Login -->
-    <div id="loginModal" data-test="login" class="modal background fade" role="dialog">
-
+    <div id="loginModal" data-test="login" class="modal modal-background fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div>
@@ -120,91 +127,99 @@
     <h1 class="contact-header bounce">Write to us or see <a href="#faq" class="faq-link">FAQ</a></h1>
 
     <!-- Contact form -->
-    
+
     <div class="form-wrapper">
-    <form id="contact-form" method="post" action="contact.php" role="form">
-        <div class="messages"></div>
-        <div class="controls">
-    
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="form_name">Firstname *</label>
-                        <input id="form_name" type="text" name="name" class="form-control" placeholder="Please enter your firstname " required="required" data-error="Firstname is required.">
-                        <div class="help-block with-errors"></div>
+        <form id="contact-form" method="post" action="contact.php" role="form">
+            <div class="messages"></div>
+            <div class="controls">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="form_name">Firstname *</label>
+                            <input id="form_name" type="text" name="name" class="form-control" placeholder="Please enter your firstname "
+                                required="required" data-error="Firstname is required.">
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="form_lastname">Lastname *</label>
+                            <input id="form_lastname" type="text" name="surname" class="form-control" placeholder="Please enter your lastname "
+                                required="required" data-error="Lastname is required.">
+                            <div class="help-block with-errors"></div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="form_lastname">Lastname *</label>
-                        <input id="form_lastname" type="text" name="surname" class="form-control" placeholder="Please enter your lastname " required="required" data-error="Lastname is required.">
-                        <div class="help-block with-errors"></div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="form_email">Email *</label>
+                            <input id="form_email" type="email" name="email" class="form-control" placeholder="Please enter your email "
+                                required="required" data-error="Valid email is required.">
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="form_need">Please specify your need *</label>
+                            <select id="form_need" name="need" class="form-control" required="required" data-error="Please specify your need.">
+                                <option value=""></option>
+                                <option value="Request quotation">Request quotation</option>
+                                <option value="Request order status">Request order status</option>
+                                <option value="Request copy of an invoice">Request copy of an invoice</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <div class="help-block with-errors"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="form_email">Email *</label>
-                        <input id="form_email" type="email" name="email" class="form-control" placeholder="Please enter your email " required="required" data-error="Valid email is required.">
-                        <div class="help-block with-errors"></div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="form_message">Message *</label>
+                            <textarea id="form_message" name="message" class="form-control" placeholder="Write your message"
+                                rows="4" required="required" data-error="Please, leave us a message."></textarea>
+                            <div class="help-block with-errors"></div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="form_need">Please specify your need *</label>
-                        <select id="form_need" name="need" class="form-control" required="required" data-error="Please specify your need.">
-                            <option value=""></option>
-                            <option value="Request quotation">Request quotation</option>
-                            <option value="Request order status">Request order status</option>
-                            <option value="Request copy of an invoice">Request copy of an invoice</option>
-                            <option value="Other">Other</option>
-                        </select>
-                        <div class="help-block with-errors"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="form_message">Message *</label>
-                        <textarea id="form_message" name="message" class="form-control" placeholder="Write your message" rows="4" required="required" data-error="Please, leave us a message."></textarea>
-                        <div class="help-block with-errors"></div>
-                    </div>
-                </div>
-                <div class="col-md-12">
+                    <div class="col-md-12">
                         <div class="container-login100-form-btn button-wrap">
-                        <div class="wrap-login100-form-btn">
-                        <div class="login100-form-bgbtn"></div>
-                    <button type="submit" class="btn-send login100-form-btn" value="Send message">Submit</button>
+                            <div class="wrap-login100-form-btn">
+                                <div class="login100-form-bgbtn"></div>
+                                <button type="submit" class="btn-send login100-form-btn" value="Send message">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="text-muted">
+                            <strong>*</strong> These fields are required.
+                        </p>
+                    </div>
                 </div>
             </div>
-            </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <p class="text-muted">
-                        <strong>*</strong> These fields are required.
-                    </p>
-                </div>
-            </div>
-        </div>
-    
-    </form>
-</div>
-<h2 class="contact-header" id="faq">FAQ</h2>
+
+        </form>
+    </div>
+    <h2 class="contact-header" id="faq">FAQ</h2>
     <div class="faq-wrapper bot-left">
-    <ul>
-        <li class="faq-question">Q: What if I won't be home for pickup?</li>
-        <li class="faq-answer">A: Give us a mail and we will arrange another pickup time.</li>
-        <li class="faq-question">Q: How long will it take for my order to arrive after I make the payment?</li>
-        <li class="faq-answer">A: It will normally take 3-5 business days for the delivery to arrive at the customer.</li>
-        <li class="faq-question">Q: Why did I encountered an error during the purchase of an item, and then it was no longer available in the product list?</li>
-        <li class="faq-answer">A: Being a donations marketplace, the ordering is on "first-come-first-served" basis.</li>
-        <li class="faq-question">Q: What if I am not happy with the product?</li>
-        <li class="faq-answer">A: Send us a mail, stating the order number and what disatisfies you about the product, and we will issue a free post sticker for the product and a full refund.</li>
-    </ul>
-</div>
+        <ul>
+            <li class="faq-question">Q: What if I won't be home for pickup?</li>
+            <li class="faq-answer">A: Give us a mail and we will arrange another pickup time.</li>
+            <li class="faq-question">Q: How long will it take for my order to arrive after I make the payment?</li>
+            <li class="faq-answer">A: It will normally take 3-5 business days for the delivery to arrive at the
+                customer.</li>
+            <li class="faq-question">Q: Why did I encountered an error during the purchase of an item, and then it was
+                no longer available in the product list?</li>
+            <li class="faq-answer">A: Being a donations marketplace, the ordering is on "first-come-first-served"
+                basis.</li>
+            <li class="faq-question">Q: What if I am not happy with the product?</li>
+            <li class="faq-answer">A: Send us a mail, stating the order number and what disatisfies you about the
+                product, and we will issue a free post sticker for the product and a full refund.</li>
+        </ul>
+    </div>
 
     <script src="../index.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
