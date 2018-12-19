@@ -47,6 +47,14 @@
   font-size: 28px;
 }
 
+.myAlert {
+  position: fixed !important;
+  top: 50px !important;
+  width: 100%;
+  text-align: center;
+  display: none;
+}
+
 a {
   font-size: 14px;
   line-height: 1.7;

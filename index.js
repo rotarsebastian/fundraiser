@@ -107,7 +107,122 @@ $('.btn-show-pass').on('click', function () {
 });
 
 const loginForm = document.querySelector(".login100-form");
-const submitForm = document.querySelector(".login100-form-btn");
+const submitForm = document.querySelector(".my-login-form-button");
+const donateForm = document.querySelector("#donate-form");
+const submitDonateForm = document.querySelector(".submit-donate-button");
+
+
+function pushBonuses(bonuses, userId) {
+    console.log("Da");
+    let totalBonuses = parseInt(bonuses);
+    let actualBonuses = parseInt(localStorage.getItem("user-bonusCode"));
+    totalBonuses = totalBonuses + actualBonuses;
+    localStorage.setItem("user-bonusCode", totalBonuses);
+    const payLoad = {
+        bonusCode: totalBonuses
+    };
+
+    const postData = JSON.stringify(payLoad);
+    fetch(`https://5bdffe29f2ef840013994a15.mockapi.io/messages/${userId}`, {
+        method: "put",
+        headers: {
+            "Content-Type": "application/json; charset=utf-8"
+        },
+        body: postData
+    })
+        .then(res => res.json())
+        .then(d => {
+            console.log(d);
+        });
+}
+
+if (donateForm) {
+
+    donateForm.addEventListener("submit", e => {
+        e.preventDefault();
+        /*let formEmail = donateForm.elements.email.value;
+        let formAddress = donateForm.elements.address.value;
+        let formPhone = donateForm.elements.phone.value;*/
+        let firstName = donateForm.elements.firstname.value;
+        let lastName = donateForm.elements.lastname.value;
+        let formShoePairs = donateForm.elements.shoes_number.value;
+        let selectedWeek = donateForm.elements.week.value;
+        let selectedTime = donateForm.elements.time.value;
+        let userID = localStorage.getItem("user-id");
+        if (submitDonateForm.innerHTML == "Get your bonus") {
+            donateForm.elements.email.value = localStorage.getItem("user-email");
+            pushBonuses(formShoePairs, userID);
+            //addOrder(userID, firstName, lastName, formShoePairs, selectedTime, selectedWeek);
+        }
+        else {
+            let formEmail = donateForm.elements.email.value;
+            let formPhone = donateForm.elements.phone.value;
+            let formMessage = donateForm.elements.message.value;
+            let formAddress = donateForm.elements.address.value;
+            const myData = {
+                firstName: firstName,
+                lastName: lastName,
+                pairs: formShoePairs,
+                week: selectedWeek,
+                hour: selectedTime,
+                email: formEmail,
+                phone: formPhone,
+                message: formMessage,
+                address: formAddress
+            }
+
+            fetch("https://5bdffe29f2ef840013994a15.mockapi.io/orders")
+                .then(res => res.json())
+                .then(function (data) {
+                    let ok = 0;
+                    /*for (let i = 0; i < data.length; i++) {
+                        if (data[i].email.toLowerCase() == myData.email.toLowerCase()) {
+                            let email = document.querySelector(".email-input");
+                            showValidate(email);
+                            ok = 1;
+                        }
+                    }
+    
+    
+                    if (validate(email) == false) {
+                        ok = 1;
+                    }
+    
+                    if (validate(myphone) == false) {
+                        ok = 1;
+    
+                    }
+                    */
+
+                    if (ok == 0) {
+                        fetch("https://5bdffe29f2ef840013994a15.mockapi.io/orders/", {
+                            method: "post",
+                            body: JSON.stringify(myData),
+                            headers: {
+                                Accept: "application/json",
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(res => { res.json(); })
+                            .then(d => {
+                            });
+
+                        document.querySelector(".myAlert").style.display = "block";
+                        document.querySelector("#donate-form").reset();
+                        setTimeout(function () {
+                            document.querySelector(".myAlert").style.display = "none";
+                        }, 5000);
+
+
+                    }
+                })
+        }
+    });
+}
+
+
+
+
 
 loginForm.addEventListener("submit", e => {
     e.preventDefault();
@@ -115,7 +230,6 @@ loginForm.addEventListener("submit", e => {
     let formPassword = loginForm.elements.pass.value;
     let formAddress = loginForm.elements.address.value;
     let formPhone = loginForm.elements.phone.value;
-    //let address = document.querySelector(".myaddress-input");
     let myphone = document.querySelector(".phone-input");
     let email = document.querySelector(".email-input");
     if (submitForm.innerHTML === "Login") {
@@ -153,14 +267,14 @@ loginForm.addEventListener("submit", e => {
                 }
 
                 let title = document.querySelector(".login100-form-title");
-                let loginButton = document.querySelector(".login100-form-btn");
+                let loginButton = document.querySelector(".my-login-form-button");
                 let myText = document.querySelector(".txt1");
                 let signUp = document.querySelector(".sign-up");
                 let emailInput = document.querySelector(".myemail-input");
                 let passInput = document.querySelector(".mypassword-input");
                 let address = document.querySelector(".myaddress-input");
                 let phone = document.querySelector(".myphone-input");
-                let logButton = document.querySelector(".wrap-login100-form-btn");
+                let logButton = document.querySelector(".my-wrap-form-button");
 
                 if (ok == 1) {
                     //title.classList.toggle("bounceIn");
@@ -198,7 +312,6 @@ loginForm.addEventListener("submit", e => {
             })
     }
 });
-
 
 
 function checkLogin(email, password) {
@@ -243,6 +356,15 @@ function checkLogin(email, password) {
                         localStorage.setItem("user-id", data[i].id);
                         localStorage.setItem("user-phone", data[i].phone);
                         localStorage.setItem("user-bonusCode", data[i].bonusCode);
+                        if (document.querySelector(".donate-title")) {
+                            let donateTitle = document.querySelector(".donate-title");
+                            donateTitle.innerHTML = "Welcome back!<br>\
+                        How many shoes would you like to donate this time?";
+                            document.querySelector(".telephone-input").style.display = "none";
+                            document.querySelector(".email-donate-input").style.display = "none";
+                            document.querySelector(".address-donate-input").style.display = "none";
+                            document.querySelector(".submit-donate-button").innerHTML = "Get your bonus";
+                        }
 
                         console.log(data[i]);
                     }
@@ -296,8 +418,19 @@ function doLogin() {
         let dashboard = document.querySelector("#dashboard-button");
         dashboard.style.display = "block";
     }
+    if (localStorage.getItem("user-id") != "false" && document.querySelector(".donate-title")) {
+        let donateTitle = document.querySelector(".donate-title");
+        donateTitle.innerHTML = "Welcome back!<br>\
+                        How many shoes would you like to donate this time?";
+        document.querySelector(".telephone-input").style.display = "none";
+        document.querySelector(".email-donate-input").style.display = "none";
+        document.querySelector(".address-donate-input").style.display = "none";
+        document.querySelector(".submit-donate-button").innerHTML = "Get your bonus";
+    }
     console.log(localStorage);
 }
+
+
 
 function doLoginLogout() {
     let myLoginButton = document.querySelector(".login-logout");
@@ -310,6 +443,17 @@ function doLoginLogout() {
         myspan.classList.add("glyphicon-log-in");
         let dashboard = document.querySelector("#dashboard-button");
         dashboard.style.display = "none";
+        localStorage["user-id"] = "false";
+        if (document.querySelector(".donate-title")) {
+            let donateTitle = document.querySelector(".donate-title");
+            donateTitle.innerHTML = "Donate your extra shoes now<br>\
+        and make someone else's feet happy!";
+            document.querySelector(".telephone-input").style.display = "block";
+            document.querySelector(".email-donate-input").style.display = "block";
+            document.querySelector(".address-donate-input").style.display = "block";
+            document.querySelector(".submit-donate-button").innerHTML = "Submit";
+        }
+
     }
 }
 
@@ -317,7 +461,7 @@ function doSignUp() {
     let modal = document.querySelector("#loginModal");
     let emailInput = document.querySelector(".myemail-input");
     let passInput = document.querySelector(".mypassword-input");
-    let logButton = document.querySelector(".wrap-login100-form-btn");
+    let logButton = document.querySelector(".my-wrap-form-button");
     let phone = document.querySelector(".myphone-input");
     let address = document.querySelector(".myaddress-input");
     logButton.style.display = "block";
@@ -326,7 +470,7 @@ function doSignUp() {
     if (modal.dataset.test == "login") {
         modal.dataset.test = "singUp";
         let title = document.querySelector(".login100-form-title");
-        let loginButton = document.querySelector(".login100-form-btn");
+        let loginButton = document.querySelector(".my-login-form-button");
         let myText = document.querySelector(".txt1");
         let signUp = document.querySelector(".sign-up");
         title.classList.toggle("bounceIn");
@@ -343,7 +487,7 @@ function doSignUp() {
     else {
         modal.dataset.test = "login";
         let title = document.querySelector(".login100-form-title");
-        let loginButton = document.querySelector(".login100-form-btn");
+        let loginButton = document.querySelector(".my-login-form-button");
         let myText = document.querySelector(".txt1");
         let signUp = document.querySelector(".sign-up");
         title.classList.toggle("bounceIn");
@@ -363,14 +507,16 @@ function doSignUp() {
 // Shop functionality
 
 $(document).ready(function () {
+
     const $itemsContainer = $('.items-container');
 
-    $.getJSON(ITEMS_URL, itemList => {
-        $itemsContainer.html('');
-        itemList.forEach((item, index) => {
-            const { image, name, price, bought, condition } = item;
+    if ($('.items-container')) {
+        $.getJSON(ITEMS_URL, itemList => {
+            $itemsContainer.html('');
+            itemList.forEach((item, index) => {
+                const { image, name, price, bought, condition } = item;
 
-            $itemsContainer.append(`
+                $itemsContainer.append(`
         <div class="shop-items">
           <div class="card">
           <div class="new-product" data-target="${condition}"><span class="new-condition">New!</span></div>
@@ -399,26 +545,29 @@ $(document).ready(function () {
             </div>
         `);
 
-            if (itemList[index].condition == "New") {
-                let $newShoe = $('.new-product');
-                $newShoe[$newShoe.length - 1].style.display = "block";
-            }
+                if (itemList[index].condition == "New") {
+                    let $newShoe = $('.new-product');
+                    if ($newShoe[$newShoe.length - 1]) {
+                        $newShoe[$newShoe.length - 1].style.display = "block";
+                    }
+                }
 
+            });
+
+
+            $addBtn = $('.add-to-cart-btn');
+            $addBtn.click(function () {
+                const itemIndex = $(this).attr('data-target');
+                addToCart(itemList[itemIndex]);
+            });
+
+            $image = $('.card-img-top');
+            $image.click(function () {
+                const itemIndex = $(this).attr('data-target');
+                openModal(itemList[itemIndex]);
+            });
         });
-
-
-        $addBtn = $('.add-to-cart-btn');
-        $addBtn.click(function () {
-            const itemIndex = $(this).attr('data-target');
-            addToCart(itemList[itemIndex]);
-        });
-
-        $image = $('.card-img-top');
-        $image.click(function () {
-            const itemIndex = $(this).attr('data-target');
-            openModal(itemList[itemIndex]);
-        });
-    });
+    }
 });
 
 function openModal(item) {
