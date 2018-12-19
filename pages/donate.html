@@ -102,9 +102,9 @@
                                     </div>
 
                                     <div class="container-login100-form-btn">
-                                        <div class="wrap-login100-form-btn">
+                                        <div class="wrap-login100-form-btn my-wrap-form-button">
                                             <div class="login100-form-bgbtn"></div>
-                                            <button class="login100-form-btn" type="submit" name="submit">Login</button>
+                                            <button class="login100-form-btn my-login-form-button" type="submit" name="submit">Login</button>
                                         </div>
                                     </div>
 
@@ -126,84 +126,135 @@
         </div>
     </div>
 
-    <h1 class="contact-header bounce donate-title">Donate your extra shoes now <br> and make someone else's feet happy!</h1>
+    <div class="donation-form">
 
-    <!-- Contact form -->
+        <h1 class="contact-header bounce donate-title">Donate your extra shoes now <br> and make someone else's feet
+            happy!</h1>
 
-    <div class="form-wrapper">
-        <form id="contact-form" method="post" action="contact.php" role="form">
-            <div class="messages"></div>
-            <div class="controls">
+        <!-- Donate form -->
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="form_name">Firstname *</label>
-                            <input id="form_name" type="text" name="name" class="form-control" placeholder="Please enter your firstname "
-                                required="required" data-error="Firstname is required.">
-                            <div class="help-block with-errors"></div>
+        <div class="form-wrapper">
+            <form id="donate-form" role="form">
+                <div class="messages"></div>
+                <div class="controls">
+
+                    <div class="row">
+                        <div class="col-md-6 first-name-input">
+                            <div class="form-group">
+                                <label for="form_name">Firstname *</label>
+                                <input id="form_name" type="text" name="firstname" class="form-control" placeholder="Please enter your firstname "
+                                    required="required" data-error="Firstname is required.">
+                                <div class="help-block with-errors"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="form_lastname">Lastname *</label>
-                            <input id="form_lastname" type="text" name="surname" class="form-control" placeholder="Please enter your lastname "
-                                required="required" data-error="Lastname is required.">
-                            <div class="help-block with-errors"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="form_email">Email *</label>
-                            <input id="form_email" type="email" name="email" class="form-control" placeholder="Please enter your email "
-                                required="required" data-error="Valid email is required.">
-                            <div class="help-block with-errors"></div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="form_need">Please specify your need *</label>
-                            <select id="form_need" name="need" class="form-control" required="required" data-error="Please specify your need.">
-                                <option value=""></option>
-                                <option value="Request quotation">Request quotation</option>
-                                <option value="Request order status">Request order status</option>
-                                <option value="Request copy of an invoice">Request copy of an invoice</option>
-                                <option value="Other">Other</option>
-                            </select>
-                            <div class="help-block with-errors"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="form_message">Message *</label>
-                            <textarea id="form_message" name="message" class="form-control" placeholder="Write your message"
-                                rows="4" required="required" data-error="Please, leave us a message."></textarea>
-                            <div class="help-block with-errors"></div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="container-login100-form-btn button-wrap">
-                            <div class="wrap-login100-form-btn">
-                                <div class="login100-form-bgbtn"></div>
-                                <button type="submit" class="btn-send login100-form-btn" value="Send message">Submit</button>
+                        <div class="col-md-6 last-name-input">
+                            <div class="form-group">
+                                <label for="form_lastname">Lastname *</label>
+                                <input id="form_lastname" type="text" name="lastname" class="form-control" placeholder="Please enter your lastname "
+                                    required="required" data-error="Lastname is required.">
+                                <div class="help-block with-errors"></div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <p class="text-muted">
-                            <strong>*</strong> These fields are required.
-                        </p>
+                    <div class="row">
+                        <div class="col-md-6 email-donate-input">
+                            <div class="form-group">
+                                <label for="form_email">Email *</label>
+                                <input id="form_email" type="email" name="email" class="form-control" placeholder="Please enter your email "
+                                    data-error="Valid email is required." pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 address-donate-input">
+                            <div class="form-group">
+                                <label for="form_address">Address *</label>
+                                <input id="form_address" type="text" name="address" class="form-control" placeholder="Please enter your address "
+                                    data-error="Valid address is required.">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 telephone-input">
+                            <div class="form-group">
+                                <label for="form_phone">Telephone number *</label>
+                                <input id="form_phone" type="number" name="phone" class="form-control" placeholder="Ex. 12345678 "
+                                    data-error="Valid phone number is required." minlength="8" name="telephone"
+                                    onkeypress="if(this.value.length==8) return false;" pattern="\d{2}\s?\d{2}\s?\d{2}\s?\d{2}">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="form_shoes_number">Number of shoes pairs *</label>
+                                <select id="form_shoes_number" name="shoes_number" class="form-control" required="required"
+                                    data-error="Please specify your need.">
+                                    <option value="1">1 pair</option>
+                                    <option value="2">2 pairs</option>
+                                    <option value="3">3 pairs</option>
+                                    <option value="4">4 pairs</option>
+                                    <option value="5">5 pairs</option>
+                                </select>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="form_week">Select the week for pick up**</label>
+                                <select id="form_week" name="week" class="form-control" required="required" data-error="Please specify your need.">
+                                    <option value="this-week">This week</option>
+                                    <option value="next-week-2">Next week</option>
+                                    <option value="in-2-weeks">In 2 weeks</option>
+
+                                </select>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="form_time">Select the time for pick up *</label>
+                                <select id="form_time" name="time" class="form-control" required="required" data-error="Please specify your need.">
+                                    <option value="12:00">12:00</option>
+                                    <option value="16:00">16:00</option>
+                                    <option value="19:00">19:00</option>
+                                </select>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="form_message">Message *</label>
+                                <textarea id="form_message" name="message" class="form-control" placeholder="Write us a message"
+                                    rows="4" required="required" data-error="Please, leave us a message."></textarea>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="container-login100-form-btn button-wrap">
+                                <div class="wrap-login100-form-btn">
+                                    <div class="login100-form-bgbtn"></div>
+                                    <button type="submit" class="btn-send login100-form-btn submit-donate-button" value="Send message">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="text-muted">
+                                <strong>*</strong> These fields are required.
+                                <br>
+                                <strong>**</strong> Donations are collected weekly every Sunday.
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-        </form>
+            </form>
+        </div>
+        <div class="alert alert-success myAlert" role="alert">
+            Your donation has been placed!
+        </div>
     </div>
 
     <script src="../index.js"></script>
