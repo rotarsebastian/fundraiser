@@ -5,16 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--Styles-->
     <link rel="stylesheet" type="text/css" href="../style.css">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../fonts/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" type="text/css" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <title>Fundraiser</title>
+    <!--Favicon-->
+    <link rel="shortcut icon" type="image/png" href="../assets/images/favicon.png" />
+    <title>StepAhead</title>
 </head>
 
 <body>
+    <!--Navigation Bar-->
     <nav class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
 
         <div class="container">
@@ -30,6 +34,8 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    <li><a class="logo" href="../index.html">
+                            StepAhead</a></li>
                     <li><a href="../index.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                             Home</a></li>
                     <li><a href="donate.html">
@@ -65,6 +71,8 @@
             </div>
         </div>
     </nav>
+
+    <!--Login Modal-->
 
     <div id="loginModal" data-test="login" class="modal modal-background fade" role="dialog">
         <div class="modal-dialog">
@@ -132,6 +140,7 @@
 
     <main role="main">
 
+        <!--Cart Items-->
         <div class="album py-5 bg-custom">
             <h1 class="shoes-title">Here are your chosen shoes</h1>
             <h5 class="shoes-subtitle"></h5>
@@ -140,6 +149,8 @@
                 </div>
             </div>
         </div>
+
+        <!--Total-->
 
         <div class="album py-5 bg-custom">
             <div class="container">
@@ -165,16 +176,8 @@
 
     </main>
 
-    <footer class="text-muted">
-        <div class="container py-4">
-            <p>Copyright &copy; 2018 Step Ahead. All rights reserved</p>
-            <p>Contact us or see our <a href="#">FAQ</a> page:</p>
-            <p>+45 12 34 56 78</p>
-            <p>customerservice@stepahead.dk</p>
-            <p>Vesterbrogade 1, 1000 Copenhagen</p>
-        </div>
-    </footer>
 
+    <!--Alerts-->
     <div class="alert alert-danger myAlert" role="alert">
         You don't have enough bonus codes!
     </div>
@@ -182,9 +185,22 @@
         Your order has been placed in your cart!
     </div>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
+    <!--Back to top button-->
+    <button id="backToTopBtn" title="Go to top">&uarr;</button>
+
+    <!--Footer-->
+
+    <footer class="text-muted">
+        <div class="container py-4">
+            <p>Copyright &copy; 2018 Step Ahead. All rights reserved</p>
+            <p>Contact us or see our <a href="contact.html">FAQ</a> page:</p>
+            <p>+45 12 34 56 78</p>
+            <p>customerservice@stepahead.dk</p>
+            <p>Vesterbrogade 1, 1000 Copenhagen</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
