@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--Styles-->
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" type="text/css" href="node_modules/sal.js/dist/sal.css">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
@@ -12,10 +13,13 @@
     <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-    <title>Fundraiser</title>
+    <!--Favicon-->
+    <link rel="shortcut icon" type="image/png" href="../assets/images/favicon.png" />
+    <title>StepAhead</title>
 </head>
 
 <body>
+    <!--Navigation Bar-->
     <nav class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
 
         <div class="container">
@@ -31,6 +35,8 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    <li><a class="logo" href="index.html">
+                            StepAhead</a></li>
                     <li class="active"><a href="index.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                             Home</a></li>
                     <li><a href="pages/donate.html">
@@ -61,6 +67,8 @@
             </div>
         </div>
     </nav>
+
+    <!--Login Modal-->
 
     <div id="loginModal" data-test="login" class="modal modal-background fade" role="dialog">
         <div class="modal-dialog">
@@ -128,6 +136,8 @@
         </div>
     </div>
 
+    <!--First Screen when you load-->
+
     <section>
         <div class="firstSection">
             <img class="firstSectionPic" src="assets/images/background.jpg" alt="" class="src">
@@ -136,15 +146,15 @@
             <h2 class="firstText">Want to get a new pair of shoes at lower price?</h2>
             <h2 class="secondText">Or simply donate your old shoes for
                 someone in need?</h2>
-            <span class="storage-scroll"></span>
-            <div class="group-bottom">
+            <a href="#step1" class="storage-scroll"></a>
+            <div id="step1" class="group-bottom">
                 <!-- <h2 class="firstText">We will take care of that!</h2>-->
                 <h2 class="firstText">Let your shoes step ahead!</h2>
             </div>
         </div>
     </section>
 
-    <!-- Step1 -->
+    <!-- First step section -->
     <section>
         <div data-sal-duration="900" data-sal="slide-up" data-sal-delay="100" data-sal-easing="ease-out-bounce">
             <div class="step1">
@@ -168,12 +178,15 @@
             </div>
     </section>
 
+    <!--White section 20,- back-->
+
     <section>
         <div class="" data-sal-duration="900" data-sal="slide-up" data-sal-delay="200" data-sal-easing="ease-out-bounce">
             <h3 class="Step1Text2">Get 20,- back for any<br>pair of shoes donated <br> in our web shop</h3>
         </div>
     </section>
-    <!-- Step2 -->
+
+    <!-- Section Step2 -->
     <section>
         <div data-sal-duration="900" data-sal="slide-up" data-sal-delay="200" data-sal-easing="ease-out-bounce">
             <div class="step2">
@@ -190,17 +203,26 @@
             </div>
         </div>
     </section>
+
+    <!--White section -->
+
     <section>
         <div data-sal-duration="900" data-sal="slide-up" data-sal-delay="200" data-sal-easing="ease-out-bounce">
             <h3 class="step2Text">From us the shoes go straight <br>to the donation organizations
         </div>
     </section>
+
+    <!--Section with organizations-->
+
     <section>
         <div data-sal-duration="900" data-sal="slide-up" data-sal-delay="200" data-sal-easing="ease-out-bounce">
             <h3 class="step2Text"><br><br>Maendenes Hjem<br><br>
                 Kofoeds Skole<br> <br> Herbergscentret</h3>
         </div>
     </section>
+
+    <!--Sign up now section-->
+
     <section>
         <div data-sal-duration="900" data-sal="slide-up" data-sal-delay="200" data-sal-easing="ease-out-bounce">
             <h3 class="step2Text"><span class="sign-up-home" data-toggle="modal" data-target="#loginModal">Sign up</span>
@@ -209,7 +231,11 @@
         </div>
     </section>
 
+    <!--Back to top button-->
 
+    <button id="backToTopBtn" title="Go to top">&uarr;</button>
+
+    <!--Scripts-->
     <script src="index.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -218,30 +244,11 @@
     <script src="main.js"></script>
     <script src="node_modules/sal.js/dist/sal.js"></script>
     <script type="module">
-        import jump from './node_modules/jump.js/dist/jump.module.js';
 
         sal({
             once: false,
         });
-        /*var button = document.getElementById('button');
-        button.addEventListener('click', function (event) {
-            jump('.target')
-        });
-        button2.addEventListener('click', function (event) {
-            jump('.target2', {
-                duration: 2000,
-            })
-        });
-        button3.addEventListener('click', function (event) {
-            jump('.target3', {
-                duration: 2000,
-                offset: 100,
-                easing: easeInOutQuad,
-                callback: () => {
-                    console.log('Completed!')
-                }
-            })
-        });*/
+
     </script>
 
 </body>

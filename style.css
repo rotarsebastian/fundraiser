@@ -572,6 +572,14 @@ iframe {
   color: white !important;
 }
 
+.add-to-cart-btn {
+  cursor: copy !important;
+}
+
+.add-one-more {
+  cursor: copy !important;
+}
+
 .myaddress-input {
   display: none;
 }
@@ -869,6 +877,25 @@ a {
   padding-left: 3%;
 }
 
+.logo-dashboard {
+  color: black !important;
+  font-weight: bolder !important;
+  font-size: 40px !important;
+}
+
+.logo {
+  color: white !important;
+}
+
+.steps-dashboard {
+  font-size: 50px;
+}
+
+.span-dashboard {
+  padding: 20px;
+  padding-bottom: 0;
+}
+
 .step1-img {
   width: 100%;
   height: 100%;
@@ -930,6 +957,28 @@ a {
 #faq {
   font-size: 3em;
   margin-bottom: 10vh;
+}
+
+#backToTopBtn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 4px;
+  padding-bottom: 8px;
+  padding-top: 6px;
+}
+
+#backToTopBtn:hover {
+  background-color: #9d9d9d;
 }
 
 .faq-link {
