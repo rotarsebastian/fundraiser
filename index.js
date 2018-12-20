@@ -295,6 +295,8 @@ function showAdministratorData() {
     const totalShoesDonated = document.querySelector(".total-shoes-donated");
     const averageShoesDonation = document.querySelector(".average-shoes-donation");
 
+
+
     if (totalDonations) {
 
         fetch("https://5bdffe29f2ef840013994a15.mockapi.io/orders")
@@ -305,6 +307,21 @@ function showAdministratorData() {
                 for (let i = 0; i < data.length; i++) {
                     let number = parseInt(data[i].pairs);
                     totalShoes += number;
+                    /*==================================================================
+                    [ List all the orders ]*/
+                    const donationsContainer = document.querySelector(".donations-list");
+                    const donationsTemplate = document.querySelector("#donations-template").content;
+                    let clone = donationsTemplate.cloneNode(true);
+                    clone.querySelector(".reference-number").textContent = "Reference number: #" + data[i].id;
+                    clone.querySelector(".customer-name").textContent = "Donor name: " + data[i].firstName + " " + data[i].lastName;
+                    clone.querySelector(".donated-pairs").textContent = "Donated pairs of shoes: " + data[i].pairs;
+                    clone.querySelector(".pick-up-week").textContent = "Pick-up: " + data[i].week;
+                    clone.querySelector(".pick-up-time").textContent = "Pick-up time: " + data[i].hour;
+                    clone.querySelector(".customer-email").textContent = "Donor email: " + data[i].email;
+                    clone.querySelector(".customer-phone").textContent = "Donor phone: " + data[i].phone;
+                    clone.querySelector(".customer-address").textContent = "Donor address: " + data[i].address;
+                    clone.querySelector(".customer-message").textContent = "Donor message: " + data[i].message;
+                    donationsContainer.appendChild(clone);
                 }
                 totalShoesDonated.textContent = totalShoes;
                 averageShoesDonation.textContent = Math.round(totalShoes / data.length * 100) / 100;
