@@ -307,21 +307,26 @@ function showAdministratorData() {
                 for (let i = 0; i < data.length; i++) {
                     let number = parseInt(data[i].pairs);
                     totalShoes += number;
-                    /*==================================================================
-                    [ List all the orders ]*/
-                    const donationsContainer = document.querySelector(".donations-list");
-                    const donationsTemplate = document.querySelector("#donations-template").content;
-                    let clone = donationsTemplate.cloneNode(true);
-                    clone.querySelector(".reference-number").textContent = "Reference number: #" + data[i].id;
-                    clone.querySelector(".customer-name").textContent = "Donor name: " + data[i].firstName + " " + data[i].lastName;
-                    clone.querySelector(".donated-pairs").textContent = "Donated pairs of shoes: " + data[i].pairs;
-                    clone.querySelector(".pick-up-week").textContent = "Pick-up: " + data[i].week;
-                    clone.querySelector(".pick-up-time").textContent = "Pick-up time: " + data[i].hour;
-                    clone.querySelector(".customer-email").textContent = "Donor email: " + data[i].email;
-                    clone.querySelector(".customer-phone").textContent = "Donor phone: " + data[i].phone;
-                    clone.querySelector(".customer-address").textContent = "Donor address: " + data[i].address;
-                    clone.querySelector(".customer-message").textContent = "Donor message: " + data[i].message;
-                    donationsContainer.appendChild(clone);
+
+                }
+                /*==================================================================
+                                [ List all the orders ]*/
+                if (document.querySelectorAll(".donation").length < data.length) {
+                    for (let j = 0; j < data.length; j++) {
+                        const donationsContainer = document.querySelector(".donations-list");
+                        const donationsTemplate = document.querySelector("#donations-template").content;
+                        let clone = donationsTemplate.cloneNode(true);
+                        clone.querySelector(".reference-number").textContent = "Reference number: #" + data[j].id;
+                        clone.querySelector(".customer-name").textContent = "Donor name: " + data[j].firstName + " " + data[j].lastName;
+                        clone.querySelector(".donated-pairs").textContent = "Donated pairs of shoes: " + data[j].pairs;
+                        clone.querySelector(".pick-up-week").textContent = "Pick-up: " + data[j].week;
+                        clone.querySelector(".pick-up-time").textContent = "Pick-up time: " + data[j].hour;
+                        clone.querySelector(".customer-email").textContent = "Donor email: " + data[j].email;
+                        clone.querySelector(".customer-phone").textContent = "Donor phone: " + data[j].phone;
+                        clone.querySelector(".customer-address").textContent = "Donor address: " + data[j].address;
+                        clone.querySelector(".customer-message").textContent = "Donor message: " + data[j].message;
+                        donationsContainer.appendChild(clone);
+                    }
                 }
                 totalShoesDonated.textContent = totalShoes;
                 averageShoesDonation.textContent = Math.round(totalShoes / data.length * 100) / 100;
