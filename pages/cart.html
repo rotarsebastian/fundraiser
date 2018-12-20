@@ -134,6 +134,7 @@
 
         <div class="album py-5 bg-custom">
             <h1 class="shoes-title">Here are your chosen shoes</h1>
+            <h5 class="shoes-subtitle"></h5>
             <div class="container">
                 <div class="cart-items-container">
                 </div>
@@ -144,7 +145,18 @@
             <div class="container">
                 <div class="the-total">
                     <div class="total-price"><strong>Subtotal:</strong> <span id="subtotal"></span></div>
-                    <div class="total-price"><strong>Tax:</strong> <span id="tax"></span></div>
+                    <div class="total-price your-bonus-codes"><strong>Bonus codes:</strong> <span id="deduction"></span>
+                        <select id="bonus_codes_added" name="bonus_codes" class="select-bonus-codes" required="required">
+                            <option class="bonus-option" value="0" selected="selected">none</option>
+                            <option class="bonus-option" value="1">1 bonus code</option>
+                            <option class="bonus-option" value="2">2 bonus codes</option>
+                            <option class="bonus-option" value="3">3 bonus codes</option>
+                            <option class="bonus-option" value="4">4 bonus codes</option>
+                            <option class="bonus-option" value="5">5 bonus codes</option>
+                        </select>
+
+                    </div>
+                    <div class="total-price"><strong>Deduction:</strong> <span id="yourDeduction"></span></div>
                     <div class="total-price"><strong>Total:</strong> <span id="total"></span></div>
                 </div>
                 <button type="button" class="btn btn-lg btn-outline-secondary btn-block proceed-btn">Proceed to payment</button>
@@ -162,6 +174,13 @@
             <p>Vesterbrogade 1, 1000 Copenhagen</p>
         </div>
     </footer>
+
+    <div class="alert alert-danger myAlert" role="alert">
+        You don't have enough bonus codes!
+    </div>
+    <div class="alert alert-success myAlert myAlertShoes" role="alert">
+        Your order has been placed in your cart!
+    </div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

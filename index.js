@@ -1,5 +1,10 @@
 let loginButton = document.querySelector("#login-button");
+let signUpSpan = document.querySelector(".sign-up-home");
 loginButton.addEventListener("click", doModal);
+
+if (signUpSpan) {
+    signUpSpan.addEventListener("click", doModal);
+}
 
 function doModal() {
     let myLoginButton = document.querySelector(".login-logout");
@@ -112,6 +117,158 @@ const donateForm = document.querySelector("#donate-form");
 const submitDonateForm = document.querySelector(".submit-donate-button");
 
 
+function showAdministratorData() {
+    const totalUsers = document.querySelector(".total-users");
+    const averageShoesUser = document.querySelector(".average-shoes-user");
+
+    if (totalUsers) {
+
+        fetch("https://5bdffe29f2ef840013994a15.mockapi.io/users")
+            .then(res => res.json())
+            .then(function (data) {
+                totalUsers.textContent = data.length;
+                let totalOfShoes = 0;
+                for (let i = 0; i < data.length; i++) {
+                    let number = parseInt(data[i].bonusCode);
+                    totalOfShoes += number;
+                }
+                averageShoesUser.textContent = Math.round(totalOfShoes / data.length * 100) / 100;
+            }
+            );
+    }
+
+    const totalDonations = document.querySelector(".total-donations");
+    const totalShoesDonated = document.querySelector(".total-shoes-donated");
+    const averageShoesDonation = document.querySelector(".average-shoes-donation");
+
+    if (totalDonations) {
+
+        fetch("https://5bdffe29f2ef840013994a15.mockapi.io/orders")
+            .then(res => res.json())
+            .then(function (data) {
+                totalDonations.textContent = data.length;
+                let totalShoes = 0;
+                for (let i = 0; i < data.length; i++) {
+                    let number = parseInt(data[i].pairs);
+                    totalShoes += number;
+                }
+                totalShoesDonated.textContent = totalShoes;
+                averageShoesDonation.textContent = Math.round(totalShoes / data.length * 100) / 100;
+            }
+            );
+    }
+
+    const moneyIncome = document.querySelector(".money-income");
+    const totalPurchases = document.querySelector(".total-purchases");
+    const averageIncomePurchase = document.querySelector(".average-income-purchase");
+
+    if (moneyIncome) {
+        fetch("https://5bdffe29f2ef840013994a15.mockapi.io/money")
+            .then(res => res.json())
+            .then(function (data) {
+                let myTotalIncome = 0;
+                for (let i = 0; i < data.length; i++) {
+                    let number = parseInt(data[i].paid);
+                    myTotalIncome += number;
+                }
+                moneyIncome.textContent = myTotalIncome + ",-";
+                averageIncomePurchase.textContent = Math.round(myTotalIncome / data.length) + ",-";
+                totalPurchases.textContent = data.length;
+            }
+            );
+    }
+
+    const shoesOnSell = document.querySelector(".shoes-on-sell");
+    const newShoesSell = document.querySelector(".new-shoes-sell");
+    const oldShoesSell = document.querySelector(".old-shoes-sell");
+
+    if (shoesOnSell) {
+        fetch("https://5bdffe29f2ef840013994a15.mockapi.io/products")
+            .then(res => res.json())
+            .then(function (data) {
+                shoesOnSell.textContent = data.length;
+                let myNewShoes = 0;
+                for (let i = 0; i < data.length; i++) {
+                    if (data[i].condition == "New") {
+                        myNewShoes++;
+                    }
+                    newShoesSell.textContent = myNewShoes;
+                    oldShoesSell.textContent = data.length - myNewShoes;
+                }
+            }
+            );
+    }
+}
+
+
+function payAndUpdateBonuses() {
+    let selectBonusCodes = document.querySelector(".select-bonus-codes");
+    let yourBonuses = localStorage.getItem("user-bonusCode");
+    let selectedBonusesNumber = parseInt(selectBonusCodes.value);
+    let yourBonusesNumber = parseInt(yourBonuses);
+
+    if (selectedBonusesNumber <= yourBonusesNumber) {
+        let newBonusCodes = yourBonusesNumber - selectedBonusesNumber;
+        localStorage.setItem("user-bonusCode", newBonusCodes);
+        console.log(localStorage);
+
+        let userID = localStorage.getItem("user-id");
+
+        const payLoad = {
+            bonusCode: newBonusCodes
+        };
+
+        const postData = JSON.stringify(payLoad);
+        fetch(`https://5bdffe29f2ef840013994a15.mockapi.io/users/${userID}`, {
+            method: "put",
+            headers: {
+                "Content-Type": "application/json; charset=utf-8"
+            },
+            body: postData
+        })
+            .then(res => res.json())
+            .then(d => {
+                console.log(d);
+            });
+
+        window.location.href = "https://paypal.me/stepaheadk";
+
+        let totalNumber = document.querySelector("#total");
+        totalNumber = parseInt(totalNumber.textContent);
+
+        const yourIncome = {
+            paid: totalNumber
+        };
+
+        fetch("https://5bdffe29f2ef840013994a15.mockapi.io/money/", {
+            method: "post",
+            body: JSON.stringify(yourIncome),
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            }
+        })
+            .then(res => res.json())
+            .then(d => {
+                console.log(d);
+            });
+
+
+
+    }
+    else {
+        console.log("error");
+        document.querySelector(".myAlert").style.display = "block";
+        setTimeout(function () {
+            document.querySelector(".myAlert").style.display = "none";
+        }, 5000);
+    }
+
+
+
+}
+
+
 function pushBonuses(bonuses, userId) {
     console.log("Da");
     let totalBonuses = parseInt(bonuses);
@@ -123,7 +280,7 @@ function pushBonuses(bonuses, userId) {
     };
 
     const postData = JSON.stringify(payLoad);
-    fetch(`https://5bdffe29f2ef840013994a15.mockapi.io/messages/${userId}`, {
+    fetch(`https://5bdffe29f2ef840013994a15.mockapi.io/users/${userId}`, {
         method: "put",
         headers: {
             "Content-Type": "application/json; charset=utf-8"
@@ -134,6 +291,52 @@ function pushBonuses(bonuses, userId) {
         .then(d => {
             console.log(d);
         });
+    document.querySelector(".myAlert").style.display = "block";
+    document.querySelector("#donate-form").reset();
+    setTimeout(function () {
+        document.querySelector(".myAlert").style.display = "none";
+    }, 5000);
+}
+
+function addOrder(firstname, lastname, shoePairs, selectedTime, selectedWeek, formMessage) {
+    let formEmail = localStorage.getItem("user-email");
+    let formPhone = localStorage.getItem("user-phone");
+    let formAddress = localStorage.getItem("user-address");
+    const myData = {
+        firstName: firstname,
+        lastName: lastname,
+        pairs: shoePairs,
+        week: selectedWeek,
+        hour: selectedTime,
+        email: formEmail,
+        phone: formPhone,
+        message: formMessage,
+        address: formAddress
+    }
+
+    fetch("https://5bdffe29f2ef840013994a15.mockapi.io/orders")
+        .then(res => res.json())
+        .then(function (data) {
+            let ok = 0;
+
+            if (ok == 0) {
+                fetch("https://5bdffe29f2ef840013994a15.mockapi.io/orders/", {
+                    method: "post",
+                    body: JSON.stringify(myData),
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json"
+                    }
+                })
+                    .then(res => { res.json(); })
+                    .then(d => {
+                    });
+
+
+            }
+        });
+
+
 }
 
 if (donateForm) {
@@ -148,16 +351,16 @@ if (donateForm) {
         let formShoePairs = donateForm.elements.shoes_number.value;
         let selectedWeek = donateForm.elements.week.value;
         let selectedTime = donateForm.elements.time.value;
+        let formMessage = donateForm.elements.message.value;
         let userID = localStorage.getItem("user-id");
         if (submitDonateForm.innerHTML == "Get your bonus") {
             donateForm.elements.email.value = localStorage.getItem("user-email");
             pushBonuses(formShoePairs, userID);
-            //addOrder(userID, firstName, lastName, formShoePairs, selectedTime, selectedWeek);
+            addOrder(firstName, lastName, formShoePairs, selectedTime, selectedWeek, formMessage);
         }
         else {
             let formEmail = donateForm.elements.email.value;
             let formPhone = donateForm.elements.phone.value;
-            let formMessage = donateForm.elements.message.value;
             let formAddress = donateForm.elements.address.value;
             const myData = {
                 firstName: firstName,
@@ -175,24 +378,6 @@ if (donateForm) {
                 .then(res => res.json())
                 .then(function (data) {
                     let ok = 0;
-                    /*for (let i = 0; i < data.length; i++) {
-                        if (data[i].email.toLowerCase() == myData.email.toLowerCase()) {
-                            let email = document.querySelector(".email-input");
-                            showValidate(email);
-                            ok = 1;
-                        }
-                    }
-    
-    
-                    if (validate(email) == false) {
-                        ok = 1;
-                    }
-    
-                    if (validate(myphone) == false) {
-                        ok = 1;
-    
-                    }
-                    */
 
                     if (ok == 0) {
                         fetch("https://5bdffe29f2ef840013994a15.mockapi.io/orders/", {
@@ -244,7 +429,7 @@ loginForm.addEventListener("submit", e => {
             bonusCode: 0
         }
 
-        fetch("https://5bdffe29f2ef840013994a15.mockapi.io/messages")
+        fetch("https://5bdffe29f2ef840013994a15.mockapi.io/users")
             .then(res => res.json())
             .then(function (data) {
                 let ok = 0;
@@ -281,7 +466,7 @@ loginForm.addEventListener("submit", e => {
                 }
 
                 if (ok == 0) {
-                    fetch("https://5bdffe29f2ef840013994a15.mockapi.io/messages/", {
+                    fetch("https://5bdffe29f2ef840013994a15.mockapi.io/users/", {
                         method: "post",
                         body: JSON.stringify(myData),
                         headers: {
@@ -320,7 +505,7 @@ function checkLogin(email, password) {
         password: password
     };
 
-    fetch("https://5bdffe29f2ef840013994a15.mockapi.io/messages")
+    fetch("https://5bdffe29f2ef840013994a15.mockapi.io/users")
         .then(res => res.json())
         .then(function (data) {
             let ok = 0;
@@ -333,7 +518,9 @@ function checkLogin(email, password) {
                         let loginModal = document.querySelector("#loginModal");
                         loginModal.style.display = "none";
                         loginModal.classList.remove("show");
-                        modalBackground.remove();
+                        if (modalBackground) {
+                            modalBackground.remove();
+                        }
                         body.classList.remove("modal-open");
                         let loginButton = document.querySelector(".login-logout");
                         loginButton.textContent = "Logout";
@@ -345,6 +532,7 @@ function checkLogin(email, password) {
                             let dashboard = document.querySelector("#dashboard-button");
                             dashboard.style.display = "block";
                             localStorage.setItem("dashboard", "true");
+                            showAdministratorData();
                         }
                         else {
                             localStorage.setItem("dashboard", "false");
@@ -364,6 +552,12 @@ function checkLogin(email, password) {
                             document.querySelector(".email-donate-input").style.display = "none";
                             document.querySelector(".address-donate-input").style.display = "none";
                             document.querySelector(".submit-donate-button").innerHTML = "Get your bonus";
+                        }
+                        if (document.querySelector(".your-bonus-codes")) {
+                            document.querySelector(".your-bonus-codes").style.display = "block";
+                        }
+                        if (document.querySelector(".shoes-subtitle")) {
+                            document.querySelector(".shoes-subtitle").style.display = "block";
                         }
 
                         console.log(data[i]);
@@ -388,10 +582,30 @@ init();
 
 function init() {
     doLogin();
+    showAdministratorData();
     let loginButton = document.querySelector("#login-button");
     let signUp = document.querySelector(".sign-up");
     loginButton.addEventListener("click", doLoginLogout);
     signUp.addEventListener("click", doSignUp);
+    const proceedBtn = document.querySelector(".proceed-btn");
+    if (proceedBtn) {
+        proceedBtn.addEventListener("click", payAndUpdateBonuses);
+    }
+    let shoesPageTitle = document.querySelector(".shoes-subtitle");
+
+    if (shoesPageTitle) {
+
+        if (parseInt(localStorage.getItem("user-bonusCode")) > 0) {
+            shoesPageTitle.innerHTML += " <br />";
+            shoesPageTitle.innerHTML += "You have " + localStorage.getItem("user-bonusCode") + " bonus codes available";
+            shoesPageTitle.style.color = "#2ECC40";
+        }
+        else {
+            shoesPageTitle.innerHTML += " <br />";
+            shoesPageTitle.innerHTML += "You have no bonus codes available";
+            shoesPageTitle.style.color = "#a94442";
+        }
+    }
 
 
 }
@@ -399,11 +613,12 @@ function init() {
 function checkingCart() {
     let cartShoes = document.querySelectorAll(".single-item");
     if (cartShoes.length > 2 && cartShoes.length % 2 == 1) {
-        cartShoes[cartShoes.length - 2].style.borderBottom = "2px solid green";
+        cartShoes[cartShoes.length - 2].style.cssText = "border-bottom: 2px solid green";
     }
+    console.log(cartShoes[cartShoes.length - 2]);
 }
 
-setTimeout(checkingCart, 50);
+
 
 function doLogin() {
     let myLoginButton = document.querySelector(".login-logout");
@@ -412,6 +627,12 @@ function doLogin() {
         let myspan = document.querySelector(".glyphicon-log-in");
         myspan.classList.remove("glyphicon-log-in");
         myspan.classList.add("glyphicon-log-out");
+        if (document.querySelector(".your-bonus-codes")) {
+            document.querySelector(".your-bonus-codes").style.display = "block";
+        }
+        if (document.querySelector(".shoes-subtitle")) {
+            document.querySelector(".shoes-subtitle").style.display = "block";
+        }
         console.log(localStorage);
     }
     if (localStorage.getItem("dashboard") == "true" && myLoginButton.textContent == "Logout") {
@@ -427,6 +648,7 @@ function doLogin() {
         document.querySelector(".address-donate-input").style.display = "none";
         document.querySelector(".submit-donate-button").innerHTML = "Get your bonus";
     }
+
     console.log(localStorage);
 }
 
@@ -444,6 +666,15 @@ function doLoginLogout() {
         let dashboard = document.querySelector("#dashboard-button");
         dashboard.style.display = "none";
         localStorage["user-id"] = "false";
+        console.log(localStorage);
+        if (document.querySelector(".your-bonus-codes")) {
+            document.querySelector(".your-bonus-codes").style.display = "none";
+            renderCart();
+        }
+        if (document.querySelector(".shoes-subtitle")) {
+            document.querySelector(".shoes-subtitle").style.display = "none";
+
+        }
         if (document.querySelector(".donate-title")) {
             let donateTitle = document.querySelector(".donate-title");
             donateTitle.innerHTML = "Donate your extra shoes now<br>\
@@ -514,9 +745,11 @@ $(document).ready(function () {
         $.getJSON(ITEMS_URL, itemList => {
             $itemsContainer.html('');
             itemList.forEach((item, index) => {
-                const { image, name, price, bought, condition } = item;
+                const { image, name, price, bought, condition, size } = item;
 
-                $itemsContainer.append(`
+                if (itemList[index].stock > 0) {
+
+                    $itemsContainer.append(`
         <div class="shop-items">
           <div class="card">
           <div class="new-product" data-target="${condition}"><span class="new-condition">New!</span></div>
@@ -539,17 +772,20 @@ $(document).ready(function () {
                     <h3 class="modal-name">${name}</h3>
                     <img class="modal-img" src="/assets/images/${image}1.png" alt="data-image">
                     <p class="modal-bought">Bought on</p>
+                    <p class="modal-size">Size</p>
                     <div class="condition"><p class="modal-condition"></p><span class="condition-new"></span></div>
                     <h4 class="modal-price"></h4>
                 </aside>
             </div>
         `);
 
-                if (itemList[index].condition == "New") {
-                    let $newShoe = $('.new-product');
-                    if ($newShoe[$newShoe.length - 1]) {
-                        $newShoe[$newShoe.length - 1].style.display = "block";
+                    if (itemList[index].condition == "New") {
+                        let $newShoe = $('.new-product');
+                        if ($newShoe[$newShoe.length - 1]) {
+                            $newShoe[$newShoe.length - 1].style.display = "block";
+                        }
                     }
+
                 }
 
             });
@@ -559,6 +795,7 @@ $(document).ready(function () {
             $addBtn.click(function () {
                 const itemIndex = $(this).attr('data-target');
                 addToCart(itemList[itemIndex]);
+
             });
 
             $image = $('.card-img-top');
@@ -566,6 +803,7 @@ $(document).ready(function () {
                 const itemIndex = $(this).attr('data-target');
                 openModal(itemList[itemIndex]);
             });
+
         });
     }
 });
@@ -579,11 +817,13 @@ function openModal(item) {
     let modalName = document.querySelector(".modal-name");
     let modalPic = document.querySelector(".modal-img");
     let modalBoughtAt = document.querySelector(".modal-bought");
+    let modalSize = document.querySelector(".modal-size");
     let modalCondition = document.querySelector(".modal-condition");
     let modalPrice = document.querySelector(".modal-price");
     modalName.textContent = item.name;
     modalPic.src = "/assets/images/" + item.image + "1.png";
     modalBoughtAt.textContent = "Bought on: " + item.bought;
+    modalSize.textContent = "Size: " + item.size;
     var starSymbol = String.fromCharCode(9733);
     var emptySymbol = String.fromCharCode(9734);
     modalCondition.textContent = "Condition: ";
@@ -605,6 +845,7 @@ function openModal(item) {
             conditionNew.style.display = "-webkit-inline-box";
             conditionNew.textContent = "New!";
             modalCondition.style.display = "none";
+            modalBoughtAt.textContent = "Model from: " + item.bought;
         }
     }
     modalPrice.textContent = "Price: " + item.price + " kr";
@@ -640,7 +881,7 @@ document.onkeydown = function (evt) {
     }
 };
 
-const ITEMS_URL = '../products.json';
+const ITEMS_URL = 'https://5bdffe29f2ef840013994a15.mockapi.io/products';
 const STORAGE_KEY = 'OVI_CART';
 
 const JSONcart = localStorage.getItem(STORAGE_KEY);
@@ -669,6 +910,7 @@ const addToCart = item => {
         _item => _item.id.toString() === item.id.toString()
     );
 
+
     if (itemIndex > -1) {
         const newQuantity = Number(cart[itemIndex].quantity) + 1;
         cart[itemIndex].quantity = newQuantity;
@@ -680,7 +922,15 @@ const addToCart = item => {
         });
     }
     localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+    if (document.querySelector(".myAlertShoes")) {
+        document.querySelector(".myAlertShoes").style.display = "block";
+        setTimeout(function () {
+            document.querySelector(".myAlertShoes").style.display = "none";
+        }, 5000);
+    }
     getCartSize();
+    checkingCart();
+
 };
 
 const removeFromCart = (id, removeOne) => {
@@ -741,7 +991,7 @@ let ok = 0;
 function renderCart() {
     const $itemsContainer = $('.cart-items-container');
     const $subtotal = $('#subtotal');
-    const $tax = $('#tax');
+    const $yourDeduction = $('#yourDeduction');
     const $total = $('#total');
 
     let billSubtotal = 0;
@@ -782,6 +1032,12 @@ function renderCart() {
     $minusBtn = $('.minus-btn');
     $removeBtn = $('.remove-btn');
 
+    $(".select-bonus-codes").change(function () {
+        renderCart();
+    });
+
+
+
     $plusBtn.click(function () {
         const id = $(this).attr('data-target');
         const item = cart.find(cartItem => cartItem.id.toString() === id.toString())
@@ -802,15 +1058,48 @@ function renderCart() {
         renderCart();
     });
 
-    const tax = parseInt((25 / 100) * billSubtotal);
+    let bonusCodes = document.querySelector("#bonus_codes_added");
+    let yourDeduction = parseInt(bonusCodes.value) * 20;
+    if (document.querySelector(".your-bonus-codes").style.display == "none") {
+        yourDeduction = 0;
+    }
     $subtotal.html(billSubtotal + ' kr');
-    $tax.html(tax + ' kr');
-    $total.html(Number(billSubtotal + tax) + ' kr');
+    $yourDeduction.html(yourDeduction + ' kr');
+    $total.html(Number(billSubtotal - yourDeduction) + ' kr');
 }
 
 $(document).ready(function () {
+
     getCartSize();
     renderCart();
+    checkingCart();
+    // This function will animate the button and then 
+    //call it self on completing the animation
+    function pulse() {
+        // This will make sure the button only animates 
+        // when the user is at the top of the page
+        if ($('#storage-room-section').scrollTop() <= 0) {
+            $('.storage-scroll').delay(200).fadeOut('slow').delay(50).fadeIn('slow', pulse);
+        }
+        else {
+        }
+    }
+    // This will trigger the animation on when document is ready
+    pulse();
+
+    $('#storage-room-section').scroll(function () {
+        if ($(this).scrollTop() > 0) {
+            // This will stop the animation
+            $('.storage-scroll').clearQueue();
+            // This will hide the bar
+            $('.storage-scroll').fadeOut("fast");
+        } else {
+            // This will restart the animation when the user 
+            // scrolls back to the top of the page
+            pulse();
+        }
+    });
+
 });
 
 
