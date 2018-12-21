@@ -310,7 +310,7 @@ function showAdministratorData() {
 
                 }
                 /*==================================================================
-                                [ List all the orders ]*/
+                [ List all the orders ]*/
                 if (document.querySelectorAll(".donation").length < data.length) {
                     for (let j = 0; j < data.length; j++) {
                         const donationsContainer = document.querySelector(".donations-list");
@@ -1320,6 +1320,3 @@ $(document).ready(function () {
     });
 
 });
-
-
-
