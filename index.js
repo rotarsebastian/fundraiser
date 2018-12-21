@@ -939,7 +939,7 @@ function openModal(item) {
     let modalCondition = document.querySelector(".modal-condition");
     let modalPrice = document.querySelector(".modal-price");
     modalName.textContent = item.name;
-    modalPic.src = "/assets/images/" + item.image + "1.png";
+    modalPic.src = "../assets/images/" + item.image + "1.png";
     modalBoughtAt.textContent = "Bought on: " + item.bought;
     modalSize.textContent = "Size: " + item.size;
     var starSymbol = String.fromCharCode(9733);
@@ -1127,7 +1127,7 @@ function renderCart() {
 
         $itemsContainer.append(`
       <div class="single-item">
-        <img class="single-pic card-img-top cart-img" src="/assets/images/${image}1.png" style="width:200px;height:200px";>
+        <img class="single-pic card-img-top cart-img" src="../assets/images/${image}1.png" style="width:200px;height:200px";>
         <div class="name-div">
           <strong >Product:</strong> ${name} 
         </div> <br><br>
@@ -1215,8 +1215,8 @@ $(document).ready(function () {
         <div class="shop-items">
           <div class="card">
           <div class="new-product" data-target="${condition}"><span class="new-condition">New!</span></div>
-            <img class="card-img-top" src="/assets/images/${image}1.png" onmouseover="this.src='/assets/images/${image}2.png';"
-              onmouseout="this.src='/assets/images/${image}1.png';" data-target="${index}" alt="Card image cap">
+            <img class="card-img-top" src="../assets/images/${image}1.png" onmouseover="this.src='../assets/images/${image}2.png';"
+              onmouseout="this.src='../assets/images/${image}1.png';" data-target="${index}" alt="Card image cap">
             <div class="card-body">
               <p class="card-text">${name}</p>
               <div class="d-flex justify-content-between align-items-center bottom-bar">
@@ -1232,7 +1232,7 @@ $(document).ready(function () {
                 <aside class="modal-shoe-content">
                     <span class="close" onclick="closeModal()">&times;</span>
                     <h3 class="modal-name">${name}</h3>
-                    <img class="modal-img" src="/assets/images/${image}1.png" alt="data-image">
+                    <img class="modal-img" src="../assets/images/${image}1.png" alt="data-image">
                     <p class="modal-bought">Bought on</p>
                     <p class="modal-size">Size</p>
                     <div class="condition"><p class="modal-condition"></p><span class="condition-new"></span></div>
