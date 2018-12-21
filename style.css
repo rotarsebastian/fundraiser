@@ -9,24 +9,24 @@
 
 @font-face {
   font-family: "Glyphicons Regular";
-  src: url("../fonts/glyphicons-regular.eot");
-  src: url("../fonts/glyphicons-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/glyphicons-regular.woff") format("woff"), url("../fonts/glyphicons-regular.ttf") format("truetype"), url("../fonts/glyphicons-regular.svg#glyphiconsregular") format("svg");
+  src: url("./fonts/glyphicons-regular.eot");
+  src: url("./fonts/glyphicons-regular.eot?#iefix") format("embedded-opentype"), url("./fonts/glyphicons-regular.woff") format("woff"), url("./fonts/glyphicons-regular.ttf") format("truetype"), url("./fonts/glyphicons-regular.svg#glyphiconsregular") format("svg");
 }
 @font-face {
   font-family: Poppins-Regular;
-  src: url("../fonts/poppins/Poppins-Regular.ttf");
+  src: url("./fonts/poppins/Poppins-Regular.ttf");
 }
 @font-face {
   font-family: Poppins-Medium;
-  src: url("../fonts/poppins/Poppins-Medium.ttf");
+  src: url("./fonts/poppins/Poppins-Medium.ttf");
 }
 @font-face {
   font-family: Poppins-Bold;
-  src: url("../fonts/poppins/Poppins-Bold.ttf");
+  src: url("./fonts/poppins/Poppins-Bold.ttf");
 }
 @font-face {
   font-family: Poppins-SemiBold;
-  src: url("../fonts/poppins/Poppins-SemiBold.ttf");
+  src: url("./fonts/poppins/Poppins-SemiBold.ttf");
 }
 .glyphicons {
   font-family: "Glyphicons Regular";
