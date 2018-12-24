@@ -166,6 +166,7 @@ function doModal() {
         let body = document.querySelector("body");
         body.classList.add("modal-open");
         modal.classList.add("in");
+        modal.classList.add("show");
     }
 }
 
